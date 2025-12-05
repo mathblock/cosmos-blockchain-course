@@ -89,7 +89,7 @@ Créons une blockchain minimale pour valider notre installation.
 
 ```bash
 # Créer une nouvelle blockchain
-ignite scaffold chain skillchain --no-module --no-git
+ignite scaffold chain skillchain --no-git
 
 # Structure générée
 cd skillchain
