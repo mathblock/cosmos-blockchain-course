@@ -89,10 +89,10 @@ Créons une blockchain minimale pour valider notre installation.
 
 ```bash
 # Créer une nouvelle blockchain
-ignite scaffold chain hello
+ignite scaffold chain skillchain --no-module --no-git
 
 # Structure générée
-cd hello
+cd skillchain
 ls -la
 # app/          - Configuration de l'application
 # cmd/          - Point d'entrée du binaire
@@ -128,7 +128,7 @@ La commande `ignite chain serve` :
 cd hello
 
 # Lister les comptes créés par défaut
-hellod keys list
+skillchaind keys list
 
 # Output:
 # - address: cosmos1...
@@ -137,7 +137,7 @@ hellod keys list
 #   name: bob
 
 # Vérifier le solde d'Alice
-hellod query bank balances $(hellod keys show alice -a)
+skillchaind query bank balances $(skillchaind keys show alice -a)
 
 # Output:
 # balances:
@@ -150,10 +150,10 @@ hellod query bank balances $(hellod keys show alice -a)
 **Tester une transaction :**
 ```bash
 # Envoyer des tokens d'Alice à Bob
-hellod tx bank send alice $(hellod keys show bob -a) 1000token --yes
+skillchaind tx bank send alice $(skillchaind keys show bob -a) 1000token --yes
 
 # Vérifier le nouveau solde de Bob
-hellod query bank balances $(hellod keys show bob -a)
+skillchaind query bank balances $(skillchaind keys show bob -a)
 ```
 
 ---
@@ -223,11 +223,11 @@ Effectuez les manipulations suivantes pour valider votre compréhension :
 ignite chain serve --reset-once
 
 # 4. Vérifier que charlie existe
-hellod keys list
-hellod query bank balances $(hellod keys show charlie -a)
+skillchaind keys list
+skillchaind query bank balances $(skillchaind keys show charlie -a)
 
 # 5. Effectuer un transfert de charlie vers alice
-hellod tx bank send charlie $(hellod keys show alice -a) 500token --yes
+skillchaind tx bank send charlie $(skillchaind keys show alice -a) 500token --yes
 ```
 
 ---
