@@ -16,10 +16,11 @@
 
 ```bash
 # Créer la blockchain SkillChain
-ignite scaffold chain skillchain --address-prefix skill
+ignite scaffold chain skillchain --address-prefix skill --skip-git --default-denom skill
 
-# --address-prefix skill : les adresses commenceront par "skill1..."
-# Par défaut, Cosmos utilise "cosmos1..."
+# --address-prefix skill : les adresses commenceront par "skill1..." - Par défaut, Cosmos utilise "cosmos1..."
+# --default-denom skill : le token natif sera SKILL au lieu de stake
+# --skip-git : ne pas initialiser un dépôt Git
 
 cd skillchain
 ```

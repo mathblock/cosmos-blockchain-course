@@ -89,10 +89,10 @@ Créons une blockchain minimale pour valider notre installation.
 
 ```bash
 # Créer une nouvelle blockchain
-ignite scaffold chain skillchain --no-git
+ignite scaffold chain testchain --skip-git
 
 # Structure générée
-cd skillchain
+cd testchain
 ls -la
 # app/          - Configuration de l'application
 # cmd/          - Point d'entrée du binaire
@@ -125,10 +125,10 @@ La commande `ignite chain serve` :
 **Ouvrir un nouveau terminal** pendant que la chaîne tourne :
 
 ```bash
-cd skillchain
+cd testchain
 
 # Lister les comptes créés par défaut
-skillchaind keys list
+testchaind keys list
 
 # Output:
 # - address: cosmos1...
@@ -137,7 +137,7 @@ skillchaind keys list
 #   name: bob
 
 # Vérifier le solde d'Alice
-skillchaind query bank balances $(skillchaind keys show alice -a)
+testchaind query bank balances $(testchaind keys show alice -a)
 
 # Output:
 # balances:
@@ -150,10 +150,10 @@ skillchaind query bank balances $(skillchaind keys show alice -a)
 **Tester une transaction :**
 ```bash
 # Envoyer des tokens d'Alice à Bob
-skillchaind tx bank send alice $(skillchaind keys show bob -a) 1000token --yes
+testchaind tx bank send alice $(testchaind keys show bob -a) 1000token --yes
 
 # Vérifier le nouveau solde de Bob
-skillchaind query bank balances $(skillchaind keys show bob -a)
+testchaind query bank balances $(testchaind keys show bob -a)
 ```
 
 ---
@@ -223,11 +223,11 @@ Effectuez les manipulations suivantes pour valider votre compréhension :
 ignite chain serve --reset-once
 
 # 4. Vérifier que charlie existe
-skillchaind keys list
-skillchaind query bank balances $(skillchaind keys show charlie -a)
+testchaind keys list
+testchaind query bank balances $(testchaind keys show charlie -a)
 
 # 5. Effectuer un transfert de charlie vers alice
-skillchaind tx bank send charlie $(skillchaind keys show alice -a) 500token --yes
+testchaind tx bank send charlie $(testchaind keys show alice -a) 500token --yes
 ```
 
 ---
