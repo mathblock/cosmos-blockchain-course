@@ -125,7 +125,7 @@ La commande `ignite chain serve` :
 **Ouvrir un nouveau terminal** pendant que la chaîne tourne :
 
 ```bash
-cd hello
+cd skillchain
 
 # Lister les comptes créés par défaut
 skillchaind keys list
