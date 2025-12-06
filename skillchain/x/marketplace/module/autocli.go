@@ -58,6 +58,12 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Short:          "Send a create-profile tx",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "name"}, {ProtoField: "bio"}, {ProtoField: "skills"}, {ProtoField: "hourly_rate"}},
 				},
+				{
+					RpcMethod:      "UpdateProfile",
+					Use:            "update-profile [name] [bio] [skills] [hourly-rate]",
+					Short:          "Send a update-profile tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "name"}, {ProtoField: "bio"}, {ProtoField: "skills"}, {ProtoField: "hourly_rate"}},
+				},
 				// this line is used by ignite scaffolding # autocli/tx
 			},
 		},

@@ -239,11 +239,127 @@ func (m *MsgCreateProfileResponse) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_MsgCreateProfileResponse proto.InternalMessageInfo
 
+// MsgUpdateProfile defines the MsgUpdateProfile message.
+type MsgUpdateProfile struct {
+	Creator    string   `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
+	Name       string   `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Bio        string   `protobuf:"bytes,3,opt,name=bio,proto3" json:"bio,omitempty"`
+	Skills     []string `protobuf:"bytes,4,rep,name=skills,proto3" json:"skills,omitempty"`
+	HourlyRate uint64   `protobuf:"varint,5,opt,name=hourly_rate,json=hourlyRate,proto3" json:"hourly_rate,omitempty"`
+}
+
+func (m *MsgUpdateProfile) Reset()         { *m = MsgUpdateProfile{} }
+func (m *MsgUpdateProfile) String() string { return proto.CompactTextString(m) }
+func (*MsgUpdateProfile) ProtoMessage()    {}
+func (*MsgUpdateProfile) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9b0e8ad05870c9a3, []int{4}
+}
+func (m *MsgUpdateProfile) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *MsgUpdateProfile) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_MsgUpdateProfile.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *MsgUpdateProfile) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgUpdateProfile.Merge(m, src)
+}
+func (m *MsgUpdateProfile) XXX_Size() int {
+	return m.Size()
+}
+func (m *MsgUpdateProfile) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgUpdateProfile.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MsgUpdateProfile proto.InternalMessageInfo
+
+func (m *MsgUpdateProfile) GetCreator() string {
+	if m != nil {
+		return m.Creator
+	}
+	return ""
+}
+
+func (m *MsgUpdateProfile) GetName() string {
+	if m != nil {
+		return m.Name
+	}
+	return ""
+}
+
+func (m *MsgUpdateProfile) GetBio() string {
+	if m != nil {
+		return m.Bio
+	}
+	return ""
+}
+
+func (m *MsgUpdateProfile) GetSkills() []string {
+	if m != nil {
+		return m.Skills
+	}
+	return nil
+}
+
+func (m *MsgUpdateProfile) GetHourlyRate() uint64 {
+	if m != nil {
+		return m.HourlyRate
+	}
+	return 0
+}
+
+// MsgUpdateProfileResponse defines the MsgUpdateProfileResponse message.
+type MsgUpdateProfileResponse struct {
+}
+
+func (m *MsgUpdateProfileResponse) Reset()         { *m = MsgUpdateProfileResponse{} }
+func (m *MsgUpdateProfileResponse) String() string { return proto.CompactTextString(m) }
+func (*MsgUpdateProfileResponse) ProtoMessage()    {}
+func (*MsgUpdateProfileResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9b0e8ad05870c9a3, []int{5}
+}
+func (m *MsgUpdateProfileResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *MsgUpdateProfileResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_MsgUpdateProfileResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *MsgUpdateProfileResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgUpdateProfileResponse.Merge(m, src)
+}
+func (m *MsgUpdateProfileResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *MsgUpdateProfileResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgUpdateProfileResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MsgUpdateProfileResponse proto.InternalMessageInfo
+
 func init() {
 	proto.RegisterType((*MsgUpdateParams)(nil), "skillchain.marketplace.v1.MsgUpdateParams")
 	proto.RegisterType((*MsgUpdateParamsResponse)(nil), "skillchain.marketplace.v1.MsgUpdateParamsResponse")
 	proto.RegisterType((*MsgCreateProfile)(nil), "skillchain.marketplace.v1.MsgCreateProfile")
 	proto.RegisterType((*MsgCreateProfileResponse)(nil), "skillchain.marketplace.v1.MsgCreateProfileResponse")
+	proto.RegisterType((*MsgUpdateProfile)(nil), "skillchain.marketplace.v1.MsgUpdateProfile")
+	proto.RegisterType((*MsgUpdateProfileResponse)(nil), "skillchain.marketplace.v1.MsgUpdateProfileResponse")
 }
 
 func init() {
@@ -251,37 +367,38 @@ func init() {
 }
 
 var fileDescriptor_9b0e8ad05870c9a3 = []byte{
-	// 471 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x94, 0x52, 0x31, 0x6f, 0xd3, 0x40,
-	0x14, 0xce, 0x91, 0x34, 0xc8, 0xaf, 0x45, 0x94, 0x53, 0x45, 0x1d, 0x0f, 0x6e, 0xf0, 0x80, 0xac,
-	0x20, 0x6c, 0x35, 0x95, 0x10, 0x2a, 0x13, 0x81, 0x35, 0x12, 0x32, 0x62, 0x61, 0xa9, 0xae, 0xc9,
-	0x71, 0xb1, 0x6a, 0xfb, 0xcc, 0xdd, 0xb5, 0x6a, 0x36, 0xc4, 0xc8, 0xc4, 0xcf, 0x60, 0x8c, 0x04,
-	0x3f, 0xa2, 0x03, 0x43, 0xc5, 0xc4, 0x84, 0x50, 0x32, 0x64, 0xe4, 0x2f, 0x20, 0x9f, 0x6d, 0xa5,
-	0xb6, 0x94, 0x42, 0x17, 0xeb, 0xbd, 0xef, 0x7d, 0xf7, 0xbe, 0xf7, 0x3d, 0x3f, 0x70, 0xe4, 0x49,
-	0x18, 0x45, 0xa3, 0x09, 0x09, 0x13, 0x3f, 0x26, 0xe2, 0x84, 0xaa, 0x34, 0x22, 0x23, 0xea, 0x9f,
-	0xed, 0xfb, 0xea, 0xdc, 0x4b, 0x05, 0x57, 0x1c, 0x77, 0x56, 0x1c, 0xef, 0x0a, 0xc7, 0x3b, 0xdb,
-	0xb7, 0xee, 0x91, 0x38, 0x4c, 0xb8, 0xaf, 0xbf, 0x39, 0xdb, 0xda, 0x1d, 0x71, 0x19, 0x73, 0xe9,
-	0xc7, 0x92, 0x65, 0x5d, 0x62, 0xc9, 0x8a, 0x42, 0x27, 0x2f, 0x1c, 0xe9, 0xcc, 0xcf, 0x93, 0xa2,
-	0xb4, 0xc3, 0x38, 0xe3, 0x39, 0x9e, 0x45, 0x05, 0xfa, 0x70, 0xfd, 0x6c, 0x29, 0x11, 0x24, 0x2e,
-	0x5e, 0x3b, 0xdf, 0x11, 0xdc, 0x1d, 0x4a, 0xf6, 0x26, 0x1d, 0x13, 0x45, 0x5f, 0xe9, 0x0a, 0x7e,
-	0x02, 0x06, 0x39, 0x55, 0x13, 0x2e, 0x42, 0x35, 0x35, 0x51, 0x17, 0xb9, 0xc6, 0xc0, 0xfc, 0xf1,
-	0xed, 0xf1, 0x4e, 0x21, 0xfb, 0x7c, 0x3c, 0x16, 0x54, 0xca, 0xd7, 0x4a, 0x84, 0x09, 0x0b, 0x56,
-	0x54, 0xfc, 0x12, 0xda, 0x79, 0x6f, 0xf3, 0x56, 0x17, 0xb9, 0x9b, 0xfd, 0x07, 0xde, 0x5a, 0xf3,
-	0x5e, 0x2e, 0x35, 0x30, 0x2e, 0x7e, 0xed, 0x35, 0xbe, 0x2c, 0x67, 0x3d, 0x14, 0x14, 0x6f, 0x0f,
-	0x9f, 0x7d, 0x5c, 0xce, 0x7a, 0xab, 0xae, 0x9f, 0x96, 0xb3, 0x9e, 0x7b, 0xc5, 0xcc, 0x79, 0xc5,
-	0x4e, 0x6d, 0x74, 0xa7, 0x03, 0xbb, 0x35, 0x28, 0xa0, 0x32, 0xe5, 0x89, 0xa4, 0xce, 0x57, 0x04,
-	0xdb, 0x43, 0xc9, 0x5e, 0x08, 0x9a, 0xd5, 0x04, 0x7f, 0x17, 0x46, 0x14, 0xf7, 0xe1, 0xf6, 0x28,
-	0x03, 0xb8, 0xf8, 0xa7, 0xd1, 0x92, 0x88, 0x31, 0xb4, 0x12, 0x12, 0x53, 0x6d, 0xd2, 0x08, 0x74,
-	0x8c, 0xb7, 0xa1, 0x79, 0x1c, 0x72, 0xb3, 0xa9, 0xa1, 0x2c, 0xc4, 0xf7, 0xa1, 0xad, 0xa7, 0x96,
-	0x66, 0xab, 0xdb, 0x74, 0x8d, 0xa0, 0xc8, 0xf0, 0x1e, 0x6c, 0x4e, 0xf8, 0xa9, 0x88, 0xa6, 0x47,
-	0x82, 0x28, 0x6a, 0x6e, 0x74, 0x91, 0xdb, 0x0a, 0x20, 0x87, 0x02, 0xa2, 0xe8, 0xe1, 0x56, 0xe6,
-	0xbf, 0x14, 0x73, 0x2c, 0x30, 0xeb, 0x43, 0x97, 0x8e, 0xfa, 0x7f, 0x10, 0x34, 0x87, 0x92, 0xe1,
-	0x04, 0xb6, 0x2a, 0xff, 0xaf, 0x77, 0xcd, 0xde, 0x6b, 0xdb, 0xb1, 0xfa, 0xff, 0xcf, 0x2d, 0x75,
-	0xf1, 0x7b, 0xb8, 0x53, 0xdd, 0xe2, 0xa3, 0xeb, 0x9b, 0x54, 0xc8, 0xd6, 0xc1, 0x0d, 0xc8, 0xa5,
-	0xa4, 0xb5, 0xf1, 0x21, 0xbb, 0x91, 0xc1, 0xd3, 0x8b, 0xb9, 0x8d, 0x2e, 0xe7, 0x36, 0xfa, 0x3d,
-	0xb7, 0xd1, 0xe7, 0x85, 0xdd, 0xb8, 0x5c, 0xd8, 0x8d, 0x9f, 0x0b, 0xbb, 0xf1, 0xd6, 0x5e, 0x7b,
-	0x22, 0x6a, 0x9a, 0x52, 0x79, 0xdc, 0xd6, 0xe7, 0x7e, 0xf0, 0x37, 0x00, 0x00, 0xff, 0xff, 0x11,
-	0xe8, 0xcb, 0x75, 0xb4, 0x03, 0x00, 0x00,
+	// 494 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xd4, 0x54, 0x31, 0x6f, 0xd3, 0x40,
+	0x18, 0xcd, 0x35, 0x69, 0x90, 0xbf, 0x16, 0x51, 0x4e, 0x15, 0x75, 0x3c, 0xb8, 0xc1, 0x03, 0xb2,
+	0x52, 0x61, 0xab, 0xa9, 0x84, 0x50, 0x99, 0x08, 0xac, 0x91, 0x90, 0x11, 0x0b, 0x4b, 0x75, 0x4d,
+	0x0e, 0xc7, 0xaa, 0xed, 0x33, 0x77, 0xd7, 0xaa, 0xd9, 0x10, 0x23, 0x13, 0x3f, 0x83, 0x31, 0x12,
+	0xfc, 0x88, 0x0e, 0x0c, 0x15, 0x13, 0x13, 0x42, 0xc9, 0x90, 0xbf, 0x81, 0x6c, 0x9f, 0x95, 0xd8,
+	0x22, 0x25, 0x8c, 0x5d, 0xa2, 0xbb, 0xf7, 0xbd, 0xfb, 0xde, 0x7b, 0xb9, 0xef, 0x0c, 0x96, 0x38,
+	0x0b, 0xc2, 0x70, 0x30, 0x22, 0x41, 0xec, 0x46, 0x84, 0x9f, 0x51, 0x99, 0x84, 0x64, 0x40, 0xdd,
+	0x8b, 0x43, 0x57, 0x5e, 0x3a, 0x09, 0x67, 0x92, 0xe1, 0xd6, 0x82, 0xe3, 0x2c, 0x71, 0x9c, 0x8b,
+	0x43, 0xe3, 0x3e, 0x89, 0x82, 0x98, 0xb9, 0xd9, 0x6f, 0xce, 0x36, 0xf6, 0x06, 0x4c, 0x44, 0x4c,
+	0xb8, 0x91, 0xf0, 0xd3, 0x2e, 0x91, 0xf0, 0x55, 0xa1, 0x95, 0x17, 0x4e, 0xb2, 0x9d, 0x9b, 0x6f,
+	0x54, 0x69, 0xd7, 0x67, 0x3e, 0xcb, 0xf1, 0x74, 0xa5, 0xd0, 0x47, 0xab, 0xbd, 0x25, 0x84, 0x93,
+	0x48, 0x9d, 0xb6, 0xbe, 0x23, 0xb8, 0xd7, 0x17, 0xfe, 0x9b, 0x64, 0x48, 0x24, 0x7d, 0x95, 0x55,
+	0xf0, 0x13, 0xd0, 0xc8, 0xb9, 0x1c, 0x31, 0x1e, 0xc8, 0xb1, 0x8e, 0xda, 0xc8, 0xd6, 0x7a, 0xfa,
+	0x8f, 0x6f, 0x8f, 0x77, 0x95, 0xec, 0xf3, 0xe1, 0x90, 0x53, 0x21, 0x5e, 0x4b, 0x1e, 0xc4, 0xbe,
+	0xb7, 0xa0, 0xe2, 0x97, 0xd0, 0xcc, 0x7b, 0xeb, 0x1b, 0x6d, 0x64, 0x6f, 0x75, 0x1f, 0x3a, 0x2b,
+	0xc3, 0x3b, 0xb9, 0x54, 0x4f, 0xbb, 0xfa, 0xb5, 0x5f, 0xfb, 0x32, 0x9f, 0x74, 0x90, 0xa7, 0xce,
+	0x1e, 0x3f, 0xfb, 0x38, 0x9f, 0x74, 0x16, 0x5d, 0x3f, 0xcd, 0x27, 0x1d, 0x7b, 0x29, 0xcc, 0x65,
+	0x29, 0x4e, 0xc5, 0xba, 0xd5, 0x82, 0xbd, 0x0a, 0xe4, 0x51, 0x91, 0xb0, 0x58, 0x50, 0xeb, 0x2b,
+	0x82, 0x9d, 0xbe, 0xf0, 0x5f, 0x70, 0x9a, 0xd6, 0x38, 0x7b, 0x17, 0x84, 0x14, 0x77, 0xe1, 0xce,
+	0x20, 0x05, 0x18, 0xff, 0x67, 0xd0, 0x82, 0x88, 0x31, 0x34, 0x62, 0x12, 0xd1, 0x2c, 0xa4, 0xe6,
+	0x65, 0x6b, 0xbc, 0x03, 0xf5, 0xd3, 0x80, 0xe9, 0xf5, 0x0c, 0x4a, 0x97, 0xf8, 0x01, 0x34, 0x33,
+	0xd7, 0x42, 0x6f, 0xb4, 0xeb, 0xb6, 0xe6, 0xa9, 0x1d, 0xde, 0x87, 0xad, 0x11, 0x3b, 0xe7, 0xe1,
+	0xf8, 0x84, 0x13, 0x49, 0xf5, 0xcd, 0x36, 0xb2, 0x1b, 0x1e, 0xe4, 0x90, 0x47, 0x24, 0x3d, 0xde,
+	0x4e, 0xf3, 0x17, 0x62, 0x96, 0x01, 0x7a, 0xd5, 0x74, 0x35, 0x91, 0x4a, 0x7b, 0xbb, 0x12, 0x95,
+	0x4c, 0x17, 0x89, 0xba, 0xd3, 0x0d, 0xa8, 0xf7, 0x85, 0x8f, 0x63, 0xd8, 0x2e, 0x4d, 0x64, 0xe7,
+	0x86, 0x49, 0xaa, 0xdc, 0xb7, 0xd1, 0x5d, 0x9f, 0x5b, 0xe8, 0xe2, 0xf7, 0x70, 0xb7, 0x3c, 0x17,
+	0x07, 0x37, 0x37, 0x29, 0x91, 0x8d, 0xa3, 0xff, 0x20, 0x2f, 0x4b, 0x96, 0x2f, 0xee, 0x60, 0x2d,
+	0xdf, 0xeb, 0x49, 0xfe, 0xf5, 0xdf, 0x35, 0x36, 0x3f, 0xa4, 0x0f, 0xad, 0xf7, 0xf4, 0x6a, 0x6a,
+	0xa2, 0xeb, 0xa9, 0x89, 0x7e, 0x4f, 0x4d, 0xf4, 0x79, 0x66, 0xd6, 0xae, 0x67, 0x66, 0xed, 0xe7,
+	0xcc, 0xac, 0xbd, 0x35, 0x57, 0xbe, 0x33, 0x39, 0x4e, 0xa8, 0x38, 0x6d, 0x66, 0xdf, 0x8c, 0xa3,
+	0x3f, 0x01, 0x00, 0x00, 0xff, 0xff, 0x00, 0xa5, 0x07, 0xd7, 0xf9, 0x04, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -301,6 +418,8 @@ type MsgClient interface {
 	UpdateParams(ctx context.Context, in *MsgUpdateParams, opts ...grpc.CallOption) (*MsgUpdateParamsResponse, error)
 	// CreateProfile defines the CreateProfile RPC.
 	CreateProfile(ctx context.Context, in *MsgCreateProfile, opts ...grpc.CallOption) (*MsgCreateProfileResponse, error)
+	// UpdateProfile defines the UpdateProfile RPC.
+	UpdateProfile(ctx context.Context, in *MsgUpdateProfile, opts ...grpc.CallOption) (*MsgUpdateProfileResponse, error)
 }
 
 type msgClient struct {
@@ -329,6 +448,15 @@ func (c *msgClient) CreateProfile(ctx context.Context, in *MsgCreateProfile, opt
 	return out, nil
 }
 
+func (c *msgClient) UpdateProfile(ctx context.Context, in *MsgUpdateProfile, opts ...grpc.CallOption) (*MsgUpdateProfileResponse, error) {
+	out := new(MsgUpdateProfileResponse)
+	err := c.cc.Invoke(ctx, "/skillchain.marketplace.v1.Msg/UpdateProfile", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MsgServer is the server API for Msg service.
 type MsgServer interface {
 	// UpdateParams defines a (governance) operation for updating the module
@@ -336,6 +464,8 @@ type MsgServer interface {
 	UpdateParams(context.Context, *MsgUpdateParams) (*MsgUpdateParamsResponse, error)
 	// CreateProfile defines the CreateProfile RPC.
 	CreateProfile(context.Context, *MsgCreateProfile) (*MsgCreateProfileResponse, error)
+	// UpdateProfile defines the UpdateProfile RPC.
+	UpdateProfile(context.Context, *MsgUpdateProfile) (*MsgUpdateProfileResponse, error)
 }
 
 // UnimplementedMsgServer can be embedded to have forward compatible implementations.
@@ -347,6 +477,9 @@ func (*UnimplementedMsgServer) UpdateParams(ctx context.Context, req *MsgUpdateP
 }
 func (*UnimplementedMsgServer) CreateProfile(ctx context.Context, req *MsgCreateProfile) (*MsgCreateProfileResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateProfile not implemented")
+}
+func (*UnimplementedMsgServer) UpdateProfile(ctx context.Context, req *MsgUpdateProfile) (*MsgUpdateProfileResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateProfile not implemented")
 }
 
 func RegisterMsgServer(s grpc1.Server, srv MsgServer) {
@@ -389,6 +522,24 @@ func _Msg_CreateProfile_Handler(srv interface{}, ctx context.Context, dec func(i
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Msg_UpdateProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgUpdateProfile)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).UpdateProfile(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/skillchain.marketplace.v1.Msg/UpdateProfile",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).UpdateProfile(ctx, req.(*MsgUpdateProfile))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var Msg_serviceDesc = _Msg_serviceDesc
 var _Msg_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "skillchain.marketplace.v1.Msg",
@@ -401,6 +552,10 @@ var _Msg_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateProfile",
 			Handler:    _Msg_CreateProfile_Handler,
+		},
+		{
+			MethodName: "UpdateProfile",
+			Handler:    _Msg_UpdateProfile_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -551,6 +706,87 @@ func (m *MsgCreateProfileResponse) MarshalToSizedBuffer(dAtA []byte) (int, error
 	return len(dAtA) - i, nil
 }
 
+func (m *MsgUpdateProfile) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *MsgUpdateProfile) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *MsgUpdateProfile) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.HourlyRate != 0 {
+		i = encodeVarintTx(dAtA, i, uint64(m.HourlyRate))
+		i--
+		dAtA[i] = 0x28
+	}
+	if len(m.Skills) > 0 {
+		for iNdEx := len(m.Skills) - 1; iNdEx >= 0; iNdEx-- {
+			i -= len(m.Skills[iNdEx])
+			copy(dAtA[i:], m.Skills[iNdEx])
+			i = encodeVarintTx(dAtA, i, uint64(len(m.Skills[iNdEx])))
+			i--
+			dAtA[i] = 0x22
+		}
+	}
+	if len(m.Bio) > 0 {
+		i -= len(m.Bio)
+		copy(dAtA[i:], m.Bio)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Bio)))
+		i--
+		dAtA[i] = 0x1a
+	}
+	if len(m.Name) > 0 {
+		i -= len(m.Name)
+		copy(dAtA[i:], m.Name)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Name)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.Creator) > 0 {
+		i -= len(m.Creator)
+		copy(dAtA[i:], m.Creator)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Creator)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *MsgUpdateProfileResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *MsgUpdateProfileResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *MsgUpdateProfileResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	return len(dAtA) - i, nil
+}
+
 func encodeVarintTx(dAtA []byte, offset int, v uint64) int {
 	offset -= sovTx(v)
 	base := offset
@@ -617,6 +853,45 @@ func (m *MsgCreateProfile) Size() (n int) {
 }
 
 func (m *MsgCreateProfileResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	return n
+}
+
+func (m *MsgUpdateProfile) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Creator)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.Name)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.Bio)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	if len(m.Skills) > 0 {
+		for _, s := range m.Skills {
+			l = len(s)
+			n += 1 + l + sovTx(uint64(l))
+		}
+	}
+	if m.HourlyRate != 0 {
+		n += 1 + sovTx(uint64(m.HourlyRate))
+	}
+	return n
+}
+
+func (m *MsgUpdateProfileResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -1020,6 +1295,253 @@ func (m *MsgCreateProfileResponse) Unmarshal(dAtA []byte) error {
 		}
 		if fieldNum <= 0 {
 			return fmt.Errorf("proto: MsgCreateProfileResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTx(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthTx
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *MsgUpdateProfile) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTx
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: MsgUpdateProfile: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: MsgUpdateProfile: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Creator", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Creator = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Name", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Name = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Bio", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Bio = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Skills", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Skills = append(m.Skills, string(dAtA[iNdEx:postIndex]))
+			iNdEx = postIndex
+		case 5:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field HourlyRate", wireType)
+			}
+			m.HourlyRate = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.HourlyRate |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTx(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthTx
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *MsgUpdateProfileResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTx
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: MsgUpdateProfileResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: MsgUpdateProfileResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		default:
