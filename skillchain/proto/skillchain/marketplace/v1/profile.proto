@@ -1,0 +1,17 @@
+syntax = "proto3";
+package skillchain.marketplace.v1;
+
+option go_package = "skillchain/x/marketplace/types";
+
+// Profile defines the Profile message.
+message Profile {
+  string owner = 1;
+  string name = 2;
+  string bio = 3;
+  repeated string skills = 4;
+  uint64 hourly_rate = 5;
+  uint64 total_jobs = 6;
+  uint64 total_earned = 7;
+  uint64 rating_sum = 8;
+  uint64 rating_count = 9;
+}

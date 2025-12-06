@@ -17,6 +17,18 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Use:       "params",
 					Short:     "Shows the parameters of the module",
 				},
+				{
+					RpcMethod: "ListProfile",
+					Use:       "list-profile",
+					Short:     "List all profile",
+				},
+				{
+					RpcMethod:      "GetProfile",
+					Use:            "get-profile [id]",
+					Short:          "Gets a profile",
+					Alias:          []string{"show-profile"},
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "owner"}},
+				},
 				// this line is used by ignite scaffolding # autocli/query
 			},
 		},

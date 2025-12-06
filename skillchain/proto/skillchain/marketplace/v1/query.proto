@@ -1,4 +1,5 @@
 syntax = "proto3";
+
 package skillchain.marketplace.v1;
 
 import "amino/amino.proto";
@@ -6,6 +7,7 @@ import "cosmos/base/query/v1beta1/pagination.proto";
 import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "skillchain/marketplace/v1/params.proto";
+import "skillchain/marketplace/v1/profile.proto";
 
 option go_package = "skillchain/x/marketplace/types";
 
@@ -14,6 +16,16 @@ service Query {
   // Parameters queries the parameters of the module.
   rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
     option (google.api.http).get = "/skillchain/marketplace/v1/params";
+  }
+
+  // ListProfile Queries a list of Profile items.
+  rpc GetProfile(QueryGetProfileRequest) returns (QueryGetProfileResponse) {
+    option (google.api.http).get = "/skillchain/marketplace/v1/profile/{owner}";
+  }
+
+  // ListProfile defines the ListProfile RPC.
+  rpc ListProfile(QueryAllProfileRequest) returns (QueryAllProfileResponse) {
+    option (google.api.http).get = "/skillchain/marketplace/v1/profile";
   }
 }
 
@@ -27,4 +39,25 @@ message QueryParamsResponse {
     (gogoproto.nullable) = false,
     (amino.dont_omitempty) = true
   ];
+}
+
+// QueryGetProfileRequest defines the QueryGetProfileRequest message.
+message QueryGetProfileRequest {
+  string owner = 1;
+}
+
+// QueryGetProfileResponse defines the QueryGetProfileResponse message.
+message QueryGetProfileResponse {
+  Profile profile = 1 [(gogoproto.nullable) = false];
+}
+
+// QueryAllProfileRequest defines the QueryAllProfileRequest message.
+message QueryAllProfileRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+// QueryAllProfileResponse defines the QueryAllProfileResponse message.
+message QueryAllProfileResponse {
+  repeated Profile profile = 1 [(gogoproto.nullable) = false];
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }

@@ -21,8 +21,21 @@ func TestGenesisState_Validate(t *testing.T) {
 		},
 		{
 			desc:     "valid genesis state",
-			genState: &types.GenesisState{},
+			genState: &types.GenesisState{ProfileMap: []types.Profile{{Owner: "0"}, {Owner: "1"}}},
 			valid:    true,
+		}, {
+			desc: "duplicated profile",
+			genState: &types.GenesisState{
+				ProfileMap: []types.Profile{
+					{
+						Owner: "0",
+					},
+					{
+						Owner: "0",
+					},
+				},
+			},
+			valid: false,
 		},
 	}
 	for _, tc := range tests {
