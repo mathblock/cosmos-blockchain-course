@@ -52,6 +52,12 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					RpcMethod: "UpdateParams",
 					Skip:      true, // skipped because authority gated
 				},
+				{
+					RpcMethod:      "CreateProfile",
+					Use:            "create-profile [name] [bio] [skills] [hourly-rate]",
+					Short:          "Send a create-profile tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "name"}, {ProtoField: "bio"}, {ProtoField: "skills"}, {ProtoField: "hourly_rate"}},
+				},
 				// this line is used by ignite scaffolding # autocli/tx
 			},
 		},
