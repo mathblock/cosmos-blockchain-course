@@ -3,6 +3,7 @@ package skillchain.marketplace.v1;
 
 import "amino/amino.proto";
 import "gogoproto/gogo.proto";
+import "cosmos_proto/cosmos.proto";
 
 option go_package = "skillchain/x/marketplace/types";
 
@@ -10,4 +11,18 @@ option go_package = "skillchain/x/marketplace/types";
 message Params {
   option (amino.name) = "skillchain/x/marketplace/Params";
   option (gogoproto.equal) = true;
+
+  // Defines the percentage fee taken by the platform on each transaction
+  uint64 platform_fee_percent = 1;
+
+  // Defines the minimum contract duration in seconds
+  uint64 min_contract_duration = 2;
+
+  // Defines the minimum price for creating mission 
+  string min_gig_price = 3 [
+    (cosmos_proto.scalar)  = "cosmos.Int",
+    (gogoproto.customtype) = "cosmossdk.io/math.Int",
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true
+  ];
 }
