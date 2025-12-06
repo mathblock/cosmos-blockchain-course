@@ -70,6 +70,12 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Short:          "Send a create-gig tx",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "title"}, {ProtoField: "description"}, {ProtoField: "price"}, {ProtoField: "category"}, {ProtoField: "delivery_days"}},
 				},
+				{
+					RpcMethod:      "UpdateGigStatus",
+					Use:            "update-gig-status [gig-id] [status]",
+					Short:          "Send a update-gig-status tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "gig_id"}, {ProtoField: "status"}},
+				},
 				// this line is used by ignite scaffolding # autocli/tx
 			},
 		},

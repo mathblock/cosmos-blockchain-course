@@ -74,6 +74,21 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 		weightMsgCreateGig,
 		marketplacesimulation.SimulateMsgCreateGig(am.authKeeper, am.bankKeeper, am.keeper, simState.TxConfig),
 	))
+	const (
+		opWeightMsgUpdateGigStatus          = "op_weight_msg_marketplace"
+		defaultWeightMsgUpdateGigStatus int = 100
+	)
+
+	var weightMsgUpdateGigStatus int
+	simState.AppParams.GetOrGenerate(opWeightMsgUpdateGigStatus, &weightMsgUpdateGigStatus, nil,
+		func(_ *rand.Rand) {
+			weightMsgUpdateGigStatus = defaultWeightMsgUpdateGigStatus
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgUpdateGigStatus,
+		marketplacesimulation.SimulateMsgUpdateGigStatus(am.authKeeper, am.bankKeeper, am.keeper, simState.TxConfig),
+	))
 
 	return operations
 }
