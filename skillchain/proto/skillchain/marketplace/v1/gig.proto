@@ -1,0 +1,17 @@
+syntax = "proto3";
+package skillchain.marketplace.v1;
+
+option go_package = "skillchain/x/marketplace/types";
+
+// Gig defines the Gig message.
+message Gig {
+  uint64 id = 1;
+  string title = 2;
+  string description = 3;
+  string owner = 4;
+  uint64 price = 5;
+  string category = 6;
+  uint64 delivery_days = 7;
+  string status = 8;
+  int64 created_at = 9;
+}

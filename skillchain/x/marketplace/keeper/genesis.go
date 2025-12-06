@@ -13,6 +13,15 @@ func (k Keeper) InitGenesis(ctx context.Context, genState types.GenesisState) er
 			return err
 		}
 	}
+	for _, elem := range genState.GigList {
+		if err := k.Gig.Set(ctx, elem.Id, elem); err != nil {
+			return err
+		}
+	}
+
+	if err := k.GigSeq.Set(ctx, genState.GigCount); err != nil {
+		return err
+	}
 
 	return k.Params.Set(ctx, genState.Params)
 }
@@ -30,6 +39,18 @@ func (k Keeper) ExportGenesis(ctx context.Context) (*types.GenesisState, error) 
 		genesis.ProfileMap = append(genesis.ProfileMap, val)
 		return false, nil
 	}); err != nil {
+		return nil, err
+	}
+	err = k.Gig.Walk(ctx, nil, func(key uint64, elem types.Gig) (bool, error) {
+		genesis.GigList = append(genesis.GigList, elem)
+		return false, nil
+	})
+	if err != nil {
+		return nil, err
+	}
+
+	genesis.GigCount, err = k.GigSeq.Peek(ctx)
+	if err != nil {
 		return nil, err
 	}
 

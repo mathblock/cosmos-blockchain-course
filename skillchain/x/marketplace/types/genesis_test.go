@@ -21,8 +21,7 @@ func TestGenesisState_Validate(t *testing.T) {
 		},
 		{
 			desc:     "valid genesis state",
-			genState: &types.GenesisState{ProfileMap: []types.Profile{{Owner: "0"}, {Owner: "1"}}},
-			valid:    true,
+			genState: &types.GenesisState{ProfileMap: []types.Profile{{Owner: "0"}, {Owner: "1"}}, GigList: []types.Gig{{Id: 0}, {Id: 1}}, GigCount: 2}, valid: true,
 		}, {
 			desc: "duplicated profile",
 			genState: &types.GenesisState{
@@ -34,6 +33,30 @@ func TestGenesisState_Validate(t *testing.T) {
 						Owner: "0",
 					},
 				},
+				GigList: []types.Gig{{Id: 0}, {Id: 1}}, GigCount: 2,
+			}, valid: false,
+		}, {
+			desc: "duplicated gig",
+			genState: &types.GenesisState{
+				GigList: []types.Gig{
+					{
+						Id: 0,
+					},
+					{
+						Id: 0,
+					},
+				},
+			},
+			valid: false,
+		}, {
+			desc: "invalid gig count",
+			genState: &types.GenesisState{
+				GigList: []types.Gig{
+					{
+						Id: 1,
+					},
+				},
+				GigCount: 0,
 			},
 			valid: false,
 		},

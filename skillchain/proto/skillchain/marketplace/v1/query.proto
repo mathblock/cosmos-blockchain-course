@@ -6,6 +6,7 @@ import "amino/amino.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
+import "skillchain/marketplace/v1/gig.proto";
 import "skillchain/marketplace/v1/params.proto";
 import "skillchain/marketplace/v1/profile.proto";
 
@@ -26,6 +27,16 @@ service Query {
   // ListProfile defines the ListProfile RPC.
   rpc ListProfile(QueryAllProfileRequest) returns (QueryAllProfileResponse) {
     option (google.api.http).get = "/skillchain/marketplace/v1/profile";
+  }
+
+  // ListGig Queries a list of Gig items.
+  rpc GetGig(QueryGetGigRequest) returns (QueryGetGigResponse) {
+    option (google.api.http).get = "/skillchain/marketplace/v1/gig/{id}";
+  }
+
+  // ListGig defines the ListGig RPC.
+  rpc ListGig(QueryAllGigRequest) returns (QueryAllGigResponse) {
+    option (google.api.http).get = "/skillchain/marketplace/v1/gig";
   }
 }
 
@@ -59,5 +70,26 @@ message QueryAllProfileRequest {
 // QueryAllProfileResponse defines the QueryAllProfileResponse message.
 message QueryAllProfileResponse {
   repeated Profile profile = 1 [(gogoproto.nullable) = false];
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+// QueryGetGigRequest defines the QueryGetGigRequest message.
+message QueryGetGigRequest {
+  uint64 id = 1;
+}
+
+// QueryGetGigResponse defines the QueryGetGigResponse message.
+message QueryGetGigResponse {
+  Gig gig = 1 [(gogoproto.nullable) = false];
+}
+
+// QueryAllGigRequest defines the QueryAllGigRequest message.
+message QueryAllGigRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+// QueryAllGigResponse defines the QueryAllGigResponse message.
+message QueryAllGigResponse {
+  repeated Gig gig = 1 [(gogoproto.nullable) = false];
   cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }

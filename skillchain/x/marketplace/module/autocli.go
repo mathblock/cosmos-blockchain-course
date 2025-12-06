@@ -29,6 +29,18 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Alias:          []string{"show-profile"},
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "owner"}},
 				},
+				{
+					RpcMethod: "ListGig",
+					Use:       "list-gig",
+					Short:     "List all gig",
+				},
+				{
+					RpcMethod:      "GetGig",
+					Use:            "get-gig [id]",
+					Short:          "Gets a gig by id",
+					Alias:          []string{"show-gig"},
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}},
+				},
 				// this line is used by ignite scaffolding # autocli/query
 			},
 		},

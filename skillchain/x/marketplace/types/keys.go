@@ -17,3 +17,8 @@ const (
 
 // ParamsKey is the prefix to retrieve all Params
 var ParamsKey = collections.NewPrefix("p_marketplace")
+
+var (
+	GigKey      = collections.NewPrefix("gig/value/")
+	GigCountKey = collections.NewPrefix("gig/count/")
+)
