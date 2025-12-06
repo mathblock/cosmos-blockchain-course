@@ -1,6 +1,8 @@
 package app
 
 import (
+	_ "skillchain/x/marketplace/module"
+	marketplacemoduletypes "skillchain/x/marketplace/types"
 	_ "skillchain/x/skillchain/module"
 	skillchainmoduletypes "skillchain/x/skillchain/types"
 	"time"
@@ -83,7 +85,7 @@ var (
 		{Account: nft.ModuleName},
 		{Account: ibctransfertypes.ModuleName, Permissions: []string{authtypes.Minter, authtypes.Burner}},
 		{Account: icatypes.ModuleName},
-	}
+		{Account: marketplacemoduletypes.ModuleName, Permissions: []string{authtypes.Minter, authtypes.Burner, authtypes.Staking}}}
 
 	// blocked account addresses
 	blockAccAddrs = []string{
@@ -126,6 +128,7 @@ var (
 						ibcexported.ModuleName,
 						// chain modules
 						skillchainmoduletypes.ModuleName,
+						marketplacemoduletypes.ModuleName,
 						// this line is used by starport scaffolding # stargate/app/beginBlockers
 					},
 					EndBlockers: []string{
@@ -135,6 +138,7 @@ var (
 						group.ModuleName,
 						// chain modules
 						skillchainmoduletypes.ModuleName,
+						marketplacemoduletypes.ModuleName,
 						// this line is used by starport scaffolding # stargate/app/endBlockers
 					},
 					// The following is mostly only needed when ModuleName != StoreKey name.
@@ -172,6 +176,7 @@ var (
 						icatypes.ModuleName,
 						// chain modules
 						skillchainmoduletypes.ModuleName,
+						marketplacemoduletypes.ModuleName,
 						// this line is used by starport scaffolding # stargate/app/initGenesis
 					},
 				}),
@@ -271,6 +276,10 @@ var (
 			{
 				Name:   skillchainmoduletypes.ModuleName,
 				Config: appconfig.WrapAny(&skillchainmoduletypes.Module{}),
+			},
+			{
+				Name:   marketplacemoduletypes.ModuleName,
+				Config: appconfig.WrapAny(&marketplacemoduletypes.Module{}),
 			},
 			// this line is used by starport scaffolding # stargate/app/moduleConfig
 		},

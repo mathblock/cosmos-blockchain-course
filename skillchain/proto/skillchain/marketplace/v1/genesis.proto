@@ -1,0 +1,17 @@
+syntax = "proto3";
+package skillchain.marketplace.v1;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+import "skillchain/marketplace/v1/params.proto";
+
+option go_package = "skillchain/x/marketplace/types";
+
+// GenesisState defines the marketplace module's genesis state.
+message GenesisState {
+  // params defines all the parameters of the module.
+  Params params = 1 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true
+  ];
+}

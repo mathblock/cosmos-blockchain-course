@@ -46,6 +46,7 @@ import (
 	ibckeeper "github.com/cosmos/ibc-go/v10/modules/core/keeper"
 
 	"skillchain/docs"
+	marketplacemodulekeeper "skillchain/x/marketplace/keeper"
 	skillchainmodulekeeper "skillchain/x/skillchain/keeper"
 )
 
@@ -99,8 +100,9 @@ type App struct {
 	TransferKeeper      ibctransferkeeper.Keeper
 
 	// simulation manager
-	sm               *module.SimulationManager
-	SkillchainKeeper skillchainmodulekeeper.Keeper
+	sm                *module.SimulationManager
+	SkillchainKeeper  skillchainmodulekeeper.Keeper
+	MarketplaceKeeper marketplacemodulekeeper.Keeper
 }
 
 func init() {
@@ -174,6 +176,7 @@ func New(
 		&app.CircuitBreakerKeeper,
 		&app.ParamsKeeper,
 		&app.SkillchainKeeper,
+		&app.MarketplaceKeeper,
 	); err != nil {
 		panic(err)
 	}
