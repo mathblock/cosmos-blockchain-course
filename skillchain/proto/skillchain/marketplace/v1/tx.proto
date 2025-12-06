@@ -23,6 +23,9 @@ service Msg {
 
   // UpdateProfile defines the UpdateProfile RPC.
   rpc UpdateProfile(MsgUpdateProfile) returns (MsgUpdateProfileResponse);
+
+  // CreateGig defines the CreateGig RPC.
+  rpc CreateGig(MsgCreateGig) returns (MsgCreateGigResponse);
 }
 
 // MsgUpdateParams is the Msg/UpdateParams request type.
@@ -71,3 +74,17 @@ message MsgUpdateProfile {
 
 // MsgUpdateProfileResponse defines the MsgUpdateProfileResponse message.
 message MsgUpdateProfileResponse {}
+
+// MsgCreateGig defines the MsgCreateGig message.
+message MsgCreateGig {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+  string title = 2;
+  string description = 3;
+  uint64 price = 4;
+  string category = 5;
+  uint64 delivery_days = 6;
+}
+
+// MsgCreateGigResponse defines the MsgCreateGigResponse message.
+message MsgCreateGigResponse {}

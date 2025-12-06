@@ -353,6 +353,128 @@ func (m *MsgUpdateProfileResponse) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_MsgUpdateProfileResponse proto.InternalMessageInfo
 
+// MsgCreateGig defines the MsgCreateGig message.
+type MsgCreateGig struct {
+	Creator      string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
+	Title        string `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
+	Description  string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
+	Price        uint64 `protobuf:"varint,4,opt,name=price,proto3" json:"price,omitempty"`
+	Category     string `protobuf:"bytes,5,opt,name=category,proto3" json:"category,omitempty"`
+	DeliveryDays uint64 `protobuf:"varint,6,opt,name=delivery_days,json=deliveryDays,proto3" json:"delivery_days,omitempty"`
+}
+
+func (m *MsgCreateGig) Reset()         { *m = MsgCreateGig{} }
+func (m *MsgCreateGig) String() string { return proto.CompactTextString(m) }
+func (*MsgCreateGig) ProtoMessage()    {}
+func (*MsgCreateGig) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9b0e8ad05870c9a3, []int{6}
+}
+func (m *MsgCreateGig) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *MsgCreateGig) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_MsgCreateGig.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *MsgCreateGig) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgCreateGig.Merge(m, src)
+}
+func (m *MsgCreateGig) XXX_Size() int {
+	return m.Size()
+}
+func (m *MsgCreateGig) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgCreateGig.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MsgCreateGig proto.InternalMessageInfo
+
+func (m *MsgCreateGig) GetCreator() string {
+	if m != nil {
+		return m.Creator
+	}
+	return ""
+}
+
+func (m *MsgCreateGig) GetTitle() string {
+	if m != nil {
+		return m.Title
+	}
+	return ""
+}
+
+func (m *MsgCreateGig) GetDescription() string {
+	if m != nil {
+		return m.Description
+	}
+	return ""
+}
+
+func (m *MsgCreateGig) GetPrice() uint64 {
+	if m != nil {
+		return m.Price
+	}
+	return 0
+}
+
+func (m *MsgCreateGig) GetCategory() string {
+	if m != nil {
+		return m.Category
+	}
+	return ""
+}
+
+func (m *MsgCreateGig) GetDeliveryDays() uint64 {
+	if m != nil {
+		return m.DeliveryDays
+	}
+	return 0
+}
+
+// MsgCreateGigResponse defines the MsgCreateGigResponse message.
+type MsgCreateGigResponse struct {
+}
+
+func (m *MsgCreateGigResponse) Reset()         { *m = MsgCreateGigResponse{} }
+func (m *MsgCreateGigResponse) String() string { return proto.CompactTextString(m) }
+func (*MsgCreateGigResponse) ProtoMessage()    {}
+func (*MsgCreateGigResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9b0e8ad05870c9a3, []int{7}
+}
+func (m *MsgCreateGigResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *MsgCreateGigResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_MsgCreateGigResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *MsgCreateGigResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgCreateGigResponse.Merge(m, src)
+}
+func (m *MsgCreateGigResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *MsgCreateGigResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgCreateGigResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MsgCreateGigResponse proto.InternalMessageInfo
+
 func init() {
 	proto.RegisterType((*MsgUpdateParams)(nil), "skillchain.marketplace.v1.MsgUpdateParams")
 	proto.RegisterType((*MsgUpdateParamsResponse)(nil), "skillchain.marketplace.v1.MsgUpdateParamsResponse")
@@ -360,6 +482,8 @@ func init() {
 	proto.RegisterType((*MsgCreateProfileResponse)(nil), "skillchain.marketplace.v1.MsgCreateProfileResponse")
 	proto.RegisterType((*MsgUpdateProfile)(nil), "skillchain.marketplace.v1.MsgUpdateProfile")
 	proto.RegisterType((*MsgUpdateProfileResponse)(nil), "skillchain.marketplace.v1.MsgUpdateProfileResponse")
+	proto.RegisterType((*MsgCreateGig)(nil), "skillchain.marketplace.v1.MsgCreateGig")
+	proto.RegisterType((*MsgCreateGigResponse)(nil), "skillchain.marketplace.v1.MsgCreateGigResponse")
 }
 
 func init() {
@@ -367,38 +491,45 @@ func init() {
 }
 
 var fileDescriptor_9b0e8ad05870c9a3 = []byte{
-	// 494 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xd4, 0x54, 0x31, 0x6f, 0xd3, 0x40,
-	0x18, 0xcd, 0x35, 0x69, 0x90, 0xbf, 0x16, 0x51, 0x4e, 0x15, 0x75, 0x3c, 0xb8, 0xc1, 0x03, 0xb2,
-	0x52, 0x61, 0xab, 0xa9, 0x84, 0x50, 0x99, 0x08, 0xac, 0x91, 0x90, 0x11, 0x0b, 0x4b, 0x75, 0x4d,
-	0x0e, 0xc7, 0xaa, 0xed, 0x33, 0x77, 0xd7, 0xaa, 0xd9, 0x10, 0x23, 0x13, 0x3f, 0x83, 0x31, 0x12,
-	0xfc, 0x88, 0x0e, 0x0c, 0x15, 0x13, 0x13, 0x42, 0xc9, 0x90, 0xbf, 0x81, 0x6c, 0x9f, 0x95, 0xd8,
-	0x22, 0x25, 0x8c, 0x5d, 0xa2, 0xbb, 0xf7, 0xbd, 0xfb, 0xde, 0x7b, 0xb9, 0xef, 0x0c, 0x96, 0x38,
-	0x0b, 0xc2, 0x70, 0x30, 0x22, 0x41, 0xec, 0x46, 0x84, 0x9f, 0x51, 0x99, 0x84, 0x64, 0x40, 0xdd,
-	0x8b, 0x43, 0x57, 0x5e, 0x3a, 0x09, 0x67, 0x92, 0xe1, 0xd6, 0x82, 0xe3, 0x2c, 0x71, 0x9c, 0x8b,
-	0x43, 0xe3, 0x3e, 0x89, 0x82, 0x98, 0xb9, 0xd9, 0x6f, 0xce, 0x36, 0xf6, 0x06, 0x4c, 0x44, 0x4c,
-	0xb8, 0x91, 0xf0, 0xd3, 0x2e, 0x91, 0xf0, 0x55, 0xa1, 0x95, 0x17, 0x4e, 0xb2, 0x9d, 0x9b, 0x6f,
-	0x54, 0x69, 0xd7, 0x67, 0x3e, 0xcb, 0xf1, 0x74, 0xa5, 0xd0, 0x47, 0xab, 0xbd, 0x25, 0x84, 0x93,
-	0x48, 0x9d, 0xb6, 0xbe, 0x23, 0xb8, 0xd7, 0x17, 0xfe, 0x9b, 0x64, 0x48, 0x24, 0x7d, 0x95, 0x55,
-	0xf0, 0x13, 0xd0, 0xc8, 0xb9, 0x1c, 0x31, 0x1e, 0xc8, 0xb1, 0x8e, 0xda, 0xc8, 0xd6, 0x7a, 0xfa,
-	0x8f, 0x6f, 0x8f, 0x77, 0x95, 0xec, 0xf3, 0xe1, 0x90, 0x53, 0x21, 0x5e, 0x4b, 0x1e, 0xc4, 0xbe,
-	0xb7, 0xa0, 0xe2, 0x97, 0xd0, 0xcc, 0x7b, 0xeb, 0x1b, 0x6d, 0x64, 0x6f, 0x75, 0x1f, 0x3a, 0x2b,
-	0xc3, 0x3b, 0xb9, 0x54, 0x4f, 0xbb, 0xfa, 0xb5, 0x5f, 0xfb, 0x32, 0x9f, 0x74, 0x90, 0xa7, 0xce,
-	0x1e, 0x3f, 0xfb, 0x38, 0x9f, 0x74, 0x16, 0x5d, 0x3f, 0xcd, 0x27, 0x1d, 0x7b, 0x29, 0xcc, 0x65,
-	0x29, 0x4e, 0xc5, 0xba, 0xd5, 0x82, 0xbd, 0x0a, 0xe4, 0x51, 0x91, 0xb0, 0x58, 0x50, 0xeb, 0x2b,
-	0x82, 0x9d, 0xbe, 0xf0, 0x5f, 0x70, 0x9a, 0xd6, 0x38, 0x7b, 0x17, 0x84, 0x14, 0x77, 0xe1, 0xce,
-	0x20, 0x05, 0x18, 0xff, 0x67, 0xd0, 0x82, 0x88, 0x31, 0x34, 0x62, 0x12, 0xd1, 0x2c, 0xa4, 0xe6,
-	0x65, 0x6b, 0xbc, 0x03, 0xf5, 0xd3, 0x80, 0xe9, 0xf5, 0x0c, 0x4a, 0x97, 0xf8, 0x01, 0x34, 0x33,
-	0xd7, 0x42, 0x6f, 0xb4, 0xeb, 0xb6, 0xe6, 0xa9, 0x1d, 0xde, 0x87, 0xad, 0x11, 0x3b, 0xe7, 0xe1,
-	0xf8, 0x84, 0x13, 0x49, 0xf5, 0xcd, 0x36, 0xb2, 0x1b, 0x1e, 0xe4, 0x90, 0x47, 0x24, 0x3d, 0xde,
-	0x4e, 0xf3, 0x17, 0x62, 0x96, 0x01, 0x7a, 0xd5, 0x74, 0x35, 0x91, 0x4a, 0x7b, 0xbb, 0x12, 0x95,
-	0x4c, 0x17, 0x89, 0xba, 0xd3, 0x0d, 0xa8, 0xf7, 0x85, 0x8f, 0x63, 0xd8, 0x2e, 0x4d, 0x64, 0xe7,
-	0x86, 0x49, 0xaa, 0xdc, 0xb7, 0xd1, 0x5d, 0x9f, 0x5b, 0xe8, 0xe2, 0xf7, 0x70, 0xb7, 0x3c, 0x17,
-	0x07, 0x37, 0x37, 0x29, 0x91, 0x8d, 0xa3, 0xff, 0x20, 0x2f, 0x4b, 0x96, 0x2f, 0xee, 0x60, 0x2d,
-	0xdf, 0xeb, 0x49, 0xfe, 0xf5, 0xdf, 0x35, 0x36, 0x3f, 0xa4, 0x0f, 0xad, 0xf7, 0xf4, 0x6a, 0x6a,
-	0xa2, 0xeb, 0xa9, 0x89, 0x7e, 0x4f, 0x4d, 0xf4, 0x79, 0x66, 0xd6, 0xae, 0x67, 0x66, 0xed, 0xe7,
-	0xcc, 0xac, 0xbd, 0x35, 0x57, 0xbe, 0x33, 0x39, 0x4e, 0xa8, 0x38, 0x6d, 0x66, 0xdf, 0x8c, 0xa3,
-	0x3f, 0x01, 0x00, 0x00, 0xff, 0xff, 0x00, 0xa5, 0x07, 0xd7, 0xf9, 0x04, 0x00, 0x00,
+	// 603 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xd4, 0x94, 0x4d, 0x6f, 0xd3, 0x4c,
+	0x10, 0xc7, 0xe3, 0x27, 0x2f, 0x0f, 0xde, 0xa4, 0xa2, 0xac, 0xa2, 0xd6, 0xf1, 0xc1, 0x0d, 0x41,
+	0x82, 0x28, 0x15, 0xb1, 0x9a, 0x4a, 0x08, 0x95, 0x13, 0xa1, 0x52, 0x4f, 0x91, 0x90, 0x11, 0x17,
+	0x2e, 0xd1, 0xd6, 0x5e, 0x9c, 0x55, 0x6d, 0xaf, 0xd9, 0xdd, 0x46, 0xf5, 0x0d, 0x71, 0xe4, 0xc4,
+	0xc7, 0xe0, 0x18, 0x09, 0x3e, 0x44, 0x91, 0x38, 0x54, 0x9c, 0x38, 0x01, 0x4a, 0x0e, 0xf9, 0x1a,
+	0xc8, 0x6f, 0x49, 0x6c, 0x91, 0x12, 0xb8, 0x71, 0xb1, 0x3c, 0xff, 0xf9, 0xef, 0xcc, 0xfc, 0xa4,
+	0xd9, 0x05, 0x2d, 0x7e, 0x46, 0x1c, 0xc7, 0x1c, 0x21, 0xe2, 0xe9, 0x2e, 0x62, 0x67, 0x58, 0xf8,
+	0x0e, 0x32, 0xb1, 0x3e, 0x3e, 0xd0, 0xc5, 0x45, 0xd7, 0x67, 0x54, 0x50, 0xd8, 0x58, 0x7a, 0xba,
+	0x2b, 0x9e, 0xee, 0xf8, 0x40, 0xbd, 0x85, 0x5c, 0xe2, 0x51, 0x3d, 0xfa, 0xc6, 0x6e, 0x75, 0xd7,
+	0xa4, 0xdc, 0xa5, 0x5c, 0x77, 0xb9, 0x1d, 0x56, 0x71, 0xb9, 0x9d, 0x24, 0x1a, 0x71, 0x62, 0x18,
+	0x45, 0x7a, 0x1c, 0x24, 0xa9, 0xba, 0x4d, 0x6d, 0x1a, 0xeb, 0xe1, 0x5f, 0xa2, 0xde, 0x5d, 0x3f,
+	0x9b, 0x8f, 0x18, 0x72, 0x93, 0xd3, 0xad, 0xcf, 0x12, 0xb8, 0x39, 0xe0, 0xf6, 0x73, 0xdf, 0x42,
+	0x02, 0x3f, 0x8d, 0x32, 0xf0, 0x01, 0x90, 0xd1, 0xb9, 0x18, 0x51, 0x46, 0x44, 0xa0, 0x48, 0x4d,
+	0xa9, 0x2d, 0xf7, 0x95, 0x2f, 0x1f, 0xef, 0xd7, 0x93, 0xb6, 0x8f, 0x2d, 0x8b, 0x61, 0xce, 0x9f,
+	0x09, 0x46, 0x3c, 0xdb, 0x58, 0x5a, 0xe1, 0x31, 0xa8, 0xc4, 0xb5, 0x95, 0xff, 0x9a, 0x52, 0xbb,
+	0xda, 0xbb, 0xdd, 0x5d, 0x0b, 0xdf, 0x8d, 0x5b, 0xf5, 0xe5, 0xcb, 0x6f, 0x7b, 0x85, 0xf7, 0xf3,
+	0x49, 0x47, 0x32, 0x92, 0xb3, 0x47, 0x8f, 0xde, 0xcc, 0x27, 0x9d, 0x65, 0xd5, 0xb7, 0xf3, 0x49,
+	0xa7, 0xbd, 0x02, 0x73, 0x91, 0xc1, 0xc9, 0x8d, 0xde, 0x6a, 0x80, 0xdd, 0x9c, 0x64, 0x60, 0xee,
+	0x53, 0x8f, 0xe3, 0xd6, 0x07, 0x09, 0x6c, 0x0f, 0xb8, 0xfd, 0x84, 0xe1, 0x30, 0xc7, 0xe8, 0x4b,
+	0xe2, 0x60, 0xd8, 0x03, 0xff, 0x9b, 0xa1, 0x40, 0xd9, 0x6f, 0x41, 0x53, 0x23, 0x84, 0xa0, 0xe4,
+	0x21, 0x17, 0x47, 0x90, 0xb2, 0x11, 0xfd, 0xc3, 0x6d, 0x50, 0x3c, 0x25, 0x54, 0x29, 0x46, 0x52,
+	0xf8, 0x0b, 0x77, 0x40, 0x25, 0x9a, 0x9a, 0x2b, 0xa5, 0x66, 0xb1, 0x2d, 0x1b, 0x49, 0x04, 0xf7,
+	0x40, 0x75, 0x44, 0xcf, 0x99, 0x13, 0x0c, 0x19, 0x12, 0x58, 0x29, 0x37, 0xa5, 0x76, 0xc9, 0x00,
+	0xb1, 0x64, 0x20, 0x81, 0x8f, 0x6a, 0x21, 0x7f, 0xda, 0xac, 0xa5, 0x02, 0x25, 0x3f, 0x74, 0x9e,
+	0x28, 0xa1, 0xfd, 0xb7, 0x88, 0x32, 0x43, 0x2f, 0x88, 0xbe, 0x4b, 0xa0, 0xb6, 0xc0, 0x3d, 0x21,
+	0xf6, 0x5f, 0xd1, 0xd4, 0x41, 0x59, 0x10, 0xe1, 0xa4, 0x38, 0x71, 0x00, 0x9b, 0xa0, 0x6a, 0x61,
+	0x6e, 0x32, 0xe2, 0x0b, 0x42, 0xbd, 0x84, 0x6b, 0x55, 0x0a, 0xcf, 0xf9, 0x8c, 0x98, 0x58, 0x29,
+	0x45, 0x04, 0x71, 0x00, 0x55, 0x70, 0xc3, 0x44, 0x02, 0xdb, 0x94, 0x05, 0x11, 0x9a, 0x6c, 0x2c,
+	0x62, 0x78, 0x07, 0x6c, 0x59, 0xd8, 0x21, 0x63, 0xcc, 0x82, 0xa1, 0x85, 0x02, 0xae, 0x54, 0xa2,
+	0x93, 0xb5, 0x54, 0x3c, 0x46, 0x01, 0xcf, 0xd1, 0xef, 0x80, 0xfa, 0x2a, 0x60, 0x4a, 0xde, 0xfb,
+	0x54, 0x04, 0xc5, 0x01, 0xb7, 0xa1, 0x07, 0x6a, 0x99, 0xbb, 0xd8, 0xb9, 0xe6, 0x0e, 0xe5, 0x36,
+	0x5d, 0xed, 0x6d, 0xee, 0x4d, 0xfb, 0xc2, 0x57, 0x60, 0x2b, 0x7b, 0x23, 0xf6, 0xaf, 0x2f, 0x92,
+	0x31, 0xab, 0x87, 0x7f, 0x60, 0x5e, 0x6d, 0x99, 0x5d, 0xd9, 0xfd, 0x8d, 0xe6, 0xde, 0xac, 0xe5,
+	0x2f, 0xf7, 0x0a, 0x62, 0x20, 0x2f, 0x77, 0xea, 0xde, 0x26, 0x43, 0x9f, 0x10, 0x5b, 0xd5, 0x37,
+	0x34, 0xa6, 0x6d, 0xd4, 0xf2, 0xeb, 0xf0, 0x25, 0xeb, 0x3f, 0xbc, 0x9c, 0x6a, 0xd2, 0xd5, 0x54,
+	0x93, 0x7e, 0x4c, 0x35, 0xe9, 0xdd, 0x4c, 0x2b, 0x5c, 0xcd, 0xb4, 0xc2, 0xd7, 0x99, 0x56, 0x78,
+	0xa1, 0xad, 0x7d, 0xc8, 0x44, 0xe0, 0x63, 0x7e, 0x5a, 0x89, 0x1e, 0xe5, 0xc3, 0x9f, 0x01, 0x00,
+	0x00, 0xff, 0xff, 0xfd, 0xda, 0xc3, 0xd9, 0x5a, 0x06, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -420,6 +551,8 @@ type MsgClient interface {
 	CreateProfile(ctx context.Context, in *MsgCreateProfile, opts ...grpc.CallOption) (*MsgCreateProfileResponse, error)
 	// UpdateProfile defines the UpdateProfile RPC.
 	UpdateProfile(ctx context.Context, in *MsgUpdateProfile, opts ...grpc.CallOption) (*MsgUpdateProfileResponse, error)
+	// CreateGig defines the CreateGig RPC.
+	CreateGig(ctx context.Context, in *MsgCreateGig, opts ...grpc.CallOption) (*MsgCreateGigResponse, error)
 }
 
 type msgClient struct {
@@ -457,6 +590,15 @@ func (c *msgClient) UpdateProfile(ctx context.Context, in *MsgUpdateProfile, opt
 	return out, nil
 }
 
+func (c *msgClient) CreateGig(ctx context.Context, in *MsgCreateGig, opts ...grpc.CallOption) (*MsgCreateGigResponse, error) {
+	out := new(MsgCreateGigResponse)
+	err := c.cc.Invoke(ctx, "/skillchain.marketplace.v1.Msg/CreateGig", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MsgServer is the server API for Msg service.
 type MsgServer interface {
 	// UpdateParams defines a (governance) operation for updating the module
@@ -466,6 +608,8 @@ type MsgServer interface {
 	CreateProfile(context.Context, *MsgCreateProfile) (*MsgCreateProfileResponse, error)
 	// UpdateProfile defines the UpdateProfile RPC.
 	UpdateProfile(context.Context, *MsgUpdateProfile) (*MsgUpdateProfileResponse, error)
+	// CreateGig defines the CreateGig RPC.
+	CreateGig(context.Context, *MsgCreateGig) (*MsgCreateGigResponse, error)
 }
 
 // UnimplementedMsgServer can be embedded to have forward compatible implementations.
@@ -480,6 +624,9 @@ func (*UnimplementedMsgServer) CreateProfile(ctx context.Context, req *MsgCreate
 }
 func (*UnimplementedMsgServer) UpdateProfile(ctx context.Context, req *MsgUpdateProfile) (*MsgUpdateProfileResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateProfile not implemented")
+}
+func (*UnimplementedMsgServer) CreateGig(ctx context.Context, req *MsgCreateGig) (*MsgCreateGigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateGig not implemented")
 }
 
 func RegisterMsgServer(s grpc1.Server, srv MsgServer) {
@@ -540,6 +687,24 @@ func _Msg_UpdateProfile_Handler(srv interface{}, ctx context.Context, dec func(i
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Msg_CreateGig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgCreateGig)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).CreateGig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/skillchain.marketplace.v1.Msg/CreateGig",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).CreateGig(ctx, req.(*MsgCreateGig))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var Msg_serviceDesc = _Msg_serviceDesc
 var _Msg_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "skillchain.marketplace.v1.Msg",
@@ -556,6 +721,10 @@ var _Msg_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateProfile",
 			Handler:    _Msg_UpdateProfile_Handler,
+		},
+		{
+			MethodName: "CreateGig",
+			Handler:    _Msg_CreateGig_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -787,6 +956,90 @@ func (m *MsgUpdateProfileResponse) MarshalToSizedBuffer(dAtA []byte) (int, error
 	return len(dAtA) - i, nil
 }
 
+func (m *MsgCreateGig) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *MsgCreateGig) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *MsgCreateGig) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.DeliveryDays != 0 {
+		i = encodeVarintTx(dAtA, i, uint64(m.DeliveryDays))
+		i--
+		dAtA[i] = 0x30
+	}
+	if len(m.Category) > 0 {
+		i -= len(m.Category)
+		copy(dAtA[i:], m.Category)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Category)))
+		i--
+		dAtA[i] = 0x2a
+	}
+	if m.Price != 0 {
+		i = encodeVarintTx(dAtA, i, uint64(m.Price))
+		i--
+		dAtA[i] = 0x20
+	}
+	if len(m.Description) > 0 {
+		i -= len(m.Description)
+		copy(dAtA[i:], m.Description)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Description)))
+		i--
+		dAtA[i] = 0x1a
+	}
+	if len(m.Title) > 0 {
+		i -= len(m.Title)
+		copy(dAtA[i:], m.Title)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Title)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.Creator) > 0 {
+		i -= len(m.Creator)
+		copy(dAtA[i:], m.Creator)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Creator)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *MsgCreateGigResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *MsgCreateGigResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *MsgCreateGigResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	return len(dAtA) - i, nil
+}
+
 func encodeVarintTx(dAtA []byte, offset int, v uint64) int {
 	offset -= sovTx(v)
 	base := offset
@@ -892,6 +1145,46 @@ func (m *MsgUpdateProfile) Size() (n int) {
 }
 
 func (m *MsgUpdateProfileResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	return n
+}
+
+func (m *MsgCreateGig) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Creator)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.Title)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.Description)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	if m.Price != 0 {
+		n += 1 + sovTx(uint64(m.Price))
+	}
+	l = len(m.Category)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	if m.DeliveryDays != 0 {
+		n += 1 + sovTx(uint64(m.DeliveryDays))
+	}
+	return n
+}
+
+func (m *MsgCreateGigResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -1542,6 +1835,272 @@ func (m *MsgUpdateProfileResponse) Unmarshal(dAtA []byte) error {
 		}
 		if fieldNum <= 0 {
 			return fmt.Errorf("proto: MsgUpdateProfileResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTx(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthTx
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *MsgCreateGig) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTx
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: MsgCreateGig: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: MsgCreateGig: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Creator", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Creator = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Title", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Title = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Description", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Description = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 4:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Price", wireType)
+			}
+			m.Price = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Price |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 5:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Category", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Category = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 6:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field DeliveryDays", wireType)
+			}
+			m.DeliveryDays = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.DeliveryDays |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTx(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthTx
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *MsgCreateGigResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTx
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: MsgCreateGigResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: MsgCreateGigResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		default:
