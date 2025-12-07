@@ -35,12 +35,12 @@ func (k msgServer) CreateGig(goCtx context.Context, msg *types.MsgCreateGig) (*t
         return nil, errorsmod.Wrap(sdkerrors.ErrInvalidRequest, "delivery days must be between 1 and 365")
     }
 
-	if len(msg.Title) < 10 || len(msg.Title) > 100 {
+	if len(msg.Title) < 5 || len(msg.Title) > 100 {
         return nil, errorsmod.Wrap(sdkerrors.ErrInvalidRequest, "title must be between 10 and 100 characters")
     }
 
-	if len(msg.Description) < 50 || len(msg.Description) > 1000 {
-		return nil, errorsmod.Wrap(sdkerrors.ErrInvalidRequest, "description must be between 50 and 1000 characters")
+	if len(msg.Description) < 10 || len(msg.Description) > 1000 {
+		return nil, errorsmod.Wrap(sdkerrors.ErrInvalidRequest, "description must be between 10 and 1000 characters")
 	}
 
 	id, err := k.GigSeq.Next(ctx)
