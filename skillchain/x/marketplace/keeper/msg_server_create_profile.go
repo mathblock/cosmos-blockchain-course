@@ -3,6 +3,7 @@ package keeper
 import (
 	"context"
 	"errors"
+	"strings"
 
 	"skillchain/x/marketplace/types"
 
@@ -32,7 +33,7 @@ func (k msgServer) CreateProfile(goCtx context.Context, msg *types.MsgCreateProf
         return nil, errorsmod.Wrap(sdkerrors.ErrInvalidRequest, "hourly rate must be at least 1 skill")
     }
 
-	if len(msg.Skills) == 0 {
+	if len(msg.Skills) < 1 {
         return nil, errorsmod.Wrap(sdkerrors.ErrInvalidRequest, "at least one skill is required")
     }
 
@@ -58,6 +59,9 @@ func (k msgServer) CreateProfile(goCtx context.Context, msg *types.MsgCreateProf
             "profile_created",
             sdk.NewAttribute("owner", msg.Creator),
             sdk.NewAttribute("name", msg.Name),
+			sdk.NewAttribute("bio", msg.Bio),
+			sdk.NewAttribute("hourly_rate", string(msg.HourlyRate)),
+			sdk.NewAttribute("skills", string(strings.Join(msg.Skills, ", "))),
         ),
     )
 
