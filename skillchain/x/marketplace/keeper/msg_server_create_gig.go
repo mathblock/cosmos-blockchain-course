@@ -66,6 +66,7 @@ func (k msgServer) CreateGig(goCtx context.Context, msg *types.MsgCreateGig) (*t
 			sdk.NewAttribute("description", msg.Description),
 			sdk.NewAttribute("price", string(msg.Price)),
 			sdk.NewAttribute("category", msg.Category),
+			sdk.NewAttribute("status", gig.Status),
 			sdk.NewAttribute("delivery_days", string(msg.DeliveryDays)),
         ),
     )
