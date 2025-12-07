@@ -7,6 +7,7 @@ import (
 
 	"skillchain/x/marketplace/types"
 
+	"cosmossdk.io/collections"
 	errorsmod "cosmossdk.io/errors"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
@@ -24,7 +25,7 @@ func (k msgServer) CreateProfile(goCtx context.Context, msg *types.MsgCreateProf
 	if err == nil {
 		// Profile exists
 		return nil, errorsmod.Wrapf(sdkerrors.ErrInvalidRequest, "profile for creator %s already exists", msg.Creator)
-	} else if !errors.Is(err, sdkerrors.ErrKeyNotFound) {
+	} else if !errors.Is(err, collections.ErrNotFound) {
 		// Some other error occurred
 		return nil, errorsmod.Wrapf(err, "failed to check existing profile for creator %s", msg.Creator)
 	}
