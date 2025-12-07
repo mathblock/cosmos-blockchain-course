@@ -10,7 +10,7 @@ import (
 var (
 	DefaultPlatformFeePercent  = uint64(5)      // 5%
 	DefaultMinContractDuration = uint64(86400)  // 1 days in secondes
-	DefaultMinGigPrice         = math.NewInt(1) // 1 SKILL
+	DefaultMinGigPrice         = math.NewInt(100_000_000) // 100 SKILL
 )
 
 // NewParams creates a new Params instance.
