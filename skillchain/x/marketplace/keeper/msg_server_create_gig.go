@@ -28,7 +28,7 @@ func (k msgServer) CreateGig(goCtx context.Context, msg *types.MsgCreateGig) (*t
 
 	priceInt := sdkmath.NewIntFromUint64(msg.Price)
 	if priceInt.LT(params.MinGigPrice) {
-		return nil, errorsmod.Wrapf(sdkerrors.ErrInvalidRequest, "gig price must be at least %d skill, got %d", params.MinGigPrice, msg.Price)
+		return nil, errorsmod.Wrapf(sdkerrors.ErrInvalidRequest, "gig price must be at least %s skill, got %d", params.MinGigPrice, msg.Price)
 	}
 
 	if msg.DeliveryDays < 1 || msg.DeliveryDays > 365 {
