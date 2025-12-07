@@ -63,7 +63,9 @@ message MsgCreateProfile {
 }
 
 // MsgCreateProfileResponse defines the MsgCreateProfileResponse message.
-message MsgCreateProfileResponse {}
+message MsgCreateProfileResponse {
+  uint64 id = 1;
+}
 
 // MsgUpdateProfile defines the MsgUpdateProfile message.
 message MsgUpdateProfile {
@@ -90,7 +92,9 @@ message MsgCreateGig {
 }
 
 // MsgCreateGigResponse defines the MsgCreateGigResponse message.
-message MsgCreateGigResponse {}
+message MsgCreateGigResponse {
+  uint64 id = 1;
+}
 
 // MsgUpdateGigStatus defines the MsgUpdateGigStatus message.
 message MsgUpdateGigStatus {
