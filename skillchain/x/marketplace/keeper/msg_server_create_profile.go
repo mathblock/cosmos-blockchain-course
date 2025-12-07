@@ -31,11 +31,11 @@ func (k msgServer) CreateProfile(goCtx context.Context, msg *types.MsgCreateProf
 	}
 
 	if msg.HourlyRate < 10 {
-        return nil, errorsmod.Wrap(sdkerrors.ErrInvalidRequest, "hourly rate must be at least 10 skill")
+        return nil, errorsmod.Wrapf(sdkerrors.ErrInvalidRequest, "hourly rate must be at least 10 skill, got %d", msg.HourlyRate)
     }
 
 	if len(msg.Skills) < 1 {
-        return nil, errorsmod.Wrap(sdkerrors.ErrInvalidRequest, "at least one skill is required")
+        return nil, errorsmod.Wrapf(sdkerrors.ErrInvalidRequest, "at least one skill is required, got %d", len(msg.Skills))
     }
 
 	profile := types.Profile{
