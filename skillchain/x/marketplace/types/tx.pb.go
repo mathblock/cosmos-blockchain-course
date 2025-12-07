@@ -440,6 +440,8 @@ func (m *MsgCreateGig) GetDeliveryDays() uint64 {
 
 // MsgCreateGigResponse defines the MsgCreateGigResponse message.
 type MsgCreateGigResponse struct {
+	Id uint64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	
 }
 
 func (m *MsgCreateGigResponse) Reset()         { *m = MsgCreateGigResponse{} }
