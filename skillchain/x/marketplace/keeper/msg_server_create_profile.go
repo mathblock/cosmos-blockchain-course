@@ -30,8 +30,8 @@ func (k msgServer) CreateProfile(goCtx context.Context, msg *types.MsgCreateProf
 		return nil, errorsmod.Wrapf(err, "failed to check existing profile for creator %s", msg.Creator)
 	}
 
-	if msg.HourlyRate < 1 {
-        return nil, errorsmod.Wrap(sdkerrors.ErrInvalidRequest, "hourly rate must be at least 1 skill")
+	if msg.HourlyRate < 10 {
+        return nil, errorsmod.Wrap(sdkerrors.ErrInvalidRequest, "hourly rate must be at least 10 skill")
     }
 
 	if len(msg.Skills) < 1 {

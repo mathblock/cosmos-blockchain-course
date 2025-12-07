@@ -10,6 +10,10 @@ accounts:
   coins:
   - 10000token
   - 100000000skill
+- name: charlie
+  coins:
+  - 5000token
+  - 50000000skill
 client:
   openapi:
     path: docs/static/openapi.json
