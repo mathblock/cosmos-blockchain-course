@@ -4,10 +4,11 @@ import (
 	"context"
 
 	sdkmath "cosmossdk.io/math"
-	
+
 	"skillchain/x/marketplace/types"
+
 	sdk "github.com/cosmos/cosmos-sdk/types"
-    sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
+	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 
 	errorsmod "cosmossdk.io/errors"
 )
@@ -42,7 +43,13 @@ func (k msgServer) CreateGig(goCtx context.Context, msg *types.MsgCreateGig) (*t
 		return nil, errorsmod.Wrap(sdkerrors.ErrInvalidRequest, "description must be between 50 and 1000 characters")
 	}
 
+	id, err := k.GigSeq.Next(ctx)
+	if err != nil {
+		return nil, errorsmod.Wrap(err, "failed to get next gig id")
+	}
+
 	gig := types.Gig{
+		Id:           id,
         Title:        msg.Title,
         Description:  msg.Description,
         Owner:        msg.Creator,

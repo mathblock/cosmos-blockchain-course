@@ -9,7 +9,6 @@ import (
 	addresscodec "github.com/cosmos/cosmos-sdk/codec/address"
 	"github.com/cosmos/cosmos-sdk/runtime"
 	"github.com/cosmos/cosmos-sdk/testutil"
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	moduletestutil "github.com/cosmos/cosmos-sdk/types/module/testutil"
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 
@@ -28,7 +27,7 @@ func initFixture(t *testing.T) *fixture {
 	t.Helper()
 
 	encCfg := moduletestutil.MakeTestEncodingConfig(module.AppModule{})
-	addressCodec := addresscodec.NewBech32Codec(sdk.GetConfig().GetBech32AccountAddrPrefix())
+	addressCodec := addresscodec.NewBech32Codec("skill")
 	storeKey := storetypes.NewKVStoreKey(types.StoreKey)
 
 	storeService := runtime.NewKVStoreService(storeKey)
