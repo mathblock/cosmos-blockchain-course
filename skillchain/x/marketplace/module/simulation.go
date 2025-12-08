@@ -21,6 +21,7 @@ func (AppModule) GenerateGenesisState(simState *module.SimulationState) {
 	marketplaceGenesis := types.GenesisState{
 		Params:          types.DefaultParams(),
 		ApplicationList: []types.Application{{Id: 0, Creator: sample.AccAddress()}, {Id: 1, Creator: sample.AccAddress()}}, ApplicationCount: 2,
+		ContractList: []types.Contract{{Id: 0, Creator: sample.AccAddress()}, {Id: 1, Creator: sample.AccAddress()}}, ContractCount: 2,
 	}
 	simState.GenState[types.ModuleName] = simState.Cdc.MustMarshalJSON(&marketplaceGenesis)
 }
@@ -135,6 +136,51 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 	operations = append(operations, simulation.NewWeightedOperation(
 		weightMsgDeleteApplication,
 		marketplacesimulation.SimulateMsgDeleteApplication(am.authKeeper, am.bankKeeper, am.keeper, simState.TxConfig),
+	))
+	const (
+		opWeightMsgCreateContract          = "op_weight_msg_marketplace"
+		defaultWeightMsgCreateContract int = 100
+	)
+
+	var weightMsgCreateContract int
+	simState.AppParams.GetOrGenerate(opWeightMsgCreateContract, &weightMsgCreateContract, nil,
+		func(_ *rand.Rand) {
+			weightMsgCreateContract = defaultWeightMsgCreateContract
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgCreateContract,
+		marketplacesimulation.SimulateMsgCreateContract(am.authKeeper, am.bankKeeper, am.keeper, simState.TxConfig),
+	))
+	const (
+		opWeightMsgUpdateContract          = "op_weight_msg_marketplace"
+		defaultWeightMsgUpdateContract int = 100
+	)
+
+	var weightMsgUpdateContract int
+	simState.AppParams.GetOrGenerate(opWeightMsgUpdateContract, &weightMsgUpdateContract, nil,
+		func(_ *rand.Rand) {
+			weightMsgUpdateContract = defaultWeightMsgUpdateContract
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgUpdateContract,
+		marketplacesimulation.SimulateMsgUpdateContract(am.authKeeper, am.bankKeeper, am.keeper, simState.TxConfig),
+	))
+	const (
+		opWeightMsgDeleteContract          = "op_weight_msg_marketplace"
+		defaultWeightMsgDeleteContract int = 100
+	)
+
+	var weightMsgDeleteContract int
+	simState.AppParams.GetOrGenerate(opWeightMsgDeleteContract, &weightMsgDeleteContract, nil,
+		func(_ *rand.Rand) {
+			weightMsgDeleteContract = defaultWeightMsgDeleteContract
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgDeleteContract,
+		marketplacesimulation.SimulateMsgDeleteContract(am.authKeeper, am.bankKeeper, am.keeper, simState.TxConfig),
 	))
 
 	return operations

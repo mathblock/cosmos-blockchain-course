@@ -31,6 +31,15 @@ func (k Keeper) InitGenesis(ctx context.Context, genState types.GenesisState) er
 	if err := k.ApplicationSeq.Set(ctx, genState.ApplicationCount); err != nil {
 		return err
 	}
+	for _, elem := range genState.ContractList {
+		if err := k.Contract.Set(ctx, elem.Id, elem); err != nil {
+			return err
+		}
+	}
+
+	if err := k.ContractSeq.Set(ctx, genState.ContractCount); err != nil {
+		return err
+	}
 
 	return k.Params.Set(ctx, genState.Params)
 }
@@ -71,6 +80,18 @@ func (k Keeper) ExportGenesis(ctx context.Context) (*types.GenesisState, error) 
 	}
 
 	genesis.ApplicationCount, err = k.ApplicationSeq.Peek(ctx)
+	if err != nil {
+		return nil, err
+	}
+	err = k.Contract.Walk(ctx, nil, func(key uint64, elem types.Contract) (bool, error) {
+		genesis.ContractList = append(genesis.ContractList, elem)
+		return false, nil
+	})
+	if err != nil {
+		return nil, err
+	}
+
+	genesis.ContractCount, err = k.ContractSeq.Peek(ctx)
 	if err != nil {
 		return nil, err
 	}

@@ -15,6 +15,8 @@ func TestGenesis(t *testing.T) {
 		GigCount:         2,
 		ApplicationList:  []types.Application{{Id: 0}, {Id: 1}},
 		ApplicationCount: 2,
+		ContractList:     []types.Contract{{Id: 0}, {Id: 1}},
+		ContractCount:    2,
 	}
 	f := initFixture(t)
 	err := f.keeper.InitGenesis(f.ctx, genesisState)
@@ -29,5 +31,7 @@ func TestGenesis(t *testing.T) {
 	require.Equal(t, genesisState.GigCount, got.GigCount)
 	require.EqualExportedValues(t, genesisState.ApplicationList, got.ApplicationList)
 	require.Equal(t, genesisState.ApplicationCount, got.ApplicationCount)
+	require.EqualExportedValues(t, genesisState.ContractList, got.ContractList)
+	require.Equal(t, genesisState.ContractCount, got.ContractCount)
 
 }

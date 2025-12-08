@@ -27,3 +27,8 @@ var (
 	ApplicationKey      = collections.NewPrefix("application/value/")
 	ApplicationCountKey = collections.NewPrefix("application/count/")
 )
+
+var (
+	ContractKey      = collections.NewPrefix("contract/value/")
+	ContractCountKey = collections.NewPrefix("contract/count/")
+)

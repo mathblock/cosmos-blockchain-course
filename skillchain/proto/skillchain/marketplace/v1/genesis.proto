@@ -5,6 +5,7 @@ package skillchain.marketplace.v1;
 import "amino/amino.proto";
 import "gogoproto/gogo.proto";
 import "skillchain/marketplace/v1/application.proto";
+import "skillchain/marketplace/v1/contract.proto";
 import "skillchain/marketplace/v1/gig.proto";
 import "skillchain/marketplace/v1/params.proto";
 import "skillchain/marketplace/v1/profile.proto";
@@ -23,4 +24,6 @@ message GenesisState {
   uint64 gig_count = 4;
   repeated Application application_list = 5 [(gogoproto.nullable) = false];
   uint64 application_count = 6;
+  repeated Contract contract_list = 7 [(gogoproto.nullable) = false];
+  uint64 contract_count = 8;
 }

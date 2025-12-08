@@ -1,0 +1,19 @@
+syntax = "proto3";
+package skillchain.marketplace.v1;
+
+option go_package = "skillchain/x/marketplace/types";
+
+// Contract defines the Contract message.
+message Contract {
+  uint64 id = 1;
+  uint64 gig_id = 2;
+  uint64 application_id = 3;
+  string client = 4;
+  string freelancer = 5;
+  uint64 price = 6;
+  int64 delivery_deadline = 7;
+  string status = 8;
+  int64 created_at = 9;
+  int64 completed_at = 10;
+  string creator = 11;
+}

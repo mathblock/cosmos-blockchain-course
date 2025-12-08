@@ -53,6 +53,18 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Alias:          []string{"show-application"},
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}},
 				},
+				{
+					RpcMethod: "ListContract",
+					Use:       "list-contract",
+					Short:     "List all contract",
+				},
+				{
+					RpcMethod:      "GetContract",
+					Use:            "get-contract [id]",
+					Short:          "Gets a contract by id",
+					Alias:          []string{"show-contract"},
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}},
+				},
 				// this line is used by ignite scaffolding # autocli/query
 			},
 		},
@@ -104,6 +116,24 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					RpcMethod:      "DeleteApplication",
 					Use:            "delete-application [id]",
 					Short:          "Delete application",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}},
+				},
+				{
+					RpcMethod:      "CreateContract",
+					Use:            "create-contract [gig-id] [application-id] [client] [freelancer] [price] [delivery-deadline] [status] [created-at] [completed-at]",
+					Short:          "Create contract",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "gig_id"}, {ProtoField: "application_id"}, {ProtoField: "client"}, {ProtoField: "freelancer"}, {ProtoField: "price"}, {ProtoField: "delivery_deadline"}, {ProtoField: "status"}, {ProtoField: "created_at"}, {ProtoField: "completed_at"}},
+				},
+				{
+					RpcMethod:      "UpdateContract",
+					Use:            "update-contract [id] [gig-id] [application-id] [client] [freelancer] [price] [delivery-deadline] [status] [created-at] [completed-at]",
+					Short:          "Update contract",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}, {ProtoField: "gig_id"}, {ProtoField: "application_id"}, {ProtoField: "client"}, {ProtoField: "freelancer"}, {ProtoField: "price"}, {ProtoField: "delivery_deadline"}, {ProtoField: "status"}, {ProtoField: "created_at"}, {ProtoField: "completed_at"}},
+				},
+				{
+					RpcMethod:      "DeleteContract",
+					Use:            "delete-contract [id]",
+					Short:          "Delete contract",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}},
 				},
 				// this line is used by ignite scaffolding # autocli/tx

@@ -28,6 +28,8 @@ type Keeper struct {
 	Gig            collections.Map[uint64, types.Gig]
 	ApplicationSeq collections.Sequence
 	Application    collections.Map[uint64, types.Application]
+	ContractSeq    collections.Sequence
+	Contract       collections.Map[uint64, types.Contract]
 }
 
 func NewKeeper(
@@ -56,6 +58,8 @@ func NewKeeper(
 		GigSeq:         collections.NewSequence(sb, types.GigCountKey, "gigSequence"),
 		Application:    collections.NewMap(sb, types.ApplicationKey, "application", collections.Uint64Key, codec.CollValue[types.Application](cdc)),
 		ApplicationSeq: collections.NewSequence(sb, types.ApplicationCountKey, "applicationSequence"),
+		Contract:       collections.NewMap(sb, types.ContractKey, "contract", collections.Uint64Key, codec.CollValue[types.Contract](cdc)),
+		ContractSeq:    collections.NewSequence(sb, types.ContractCountKey, "contractSequence"),
 	}
 	schema, err := sb.Build()
 	if err != nil {

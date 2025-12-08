@@ -38,6 +38,15 @@ service Msg {
 
   // DeleteApplication defines the DeleteApplication RPC.
   rpc DeleteApplication(MsgDeleteApplication) returns (MsgDeleteApplicationResponse);
+
+  // CreateContract defines the CreateContract RPC.
+  rpc CreateContract(MsgCreateContract) returns (MsgCreateContractResponse);
+
+  // UpdateContract defines the UpdateContract RPC.
+  rpc UpdateContract(MsgUpdateContract) returns (MsgUpdateContractResponse);
+
+  // DeleteContract defines the DeleteContract RPC.
+  rpc DeleteContract(MsgDeleteContract) returns (MsgDeleteContractResponse);
 }
 
 // MsgUpdateParams is the Msg/UpdateParams request type.
@@ -160,3 +169,52 @@ message MsgDeleteApplication {
 
 // MsgDeleteApplicationResponse defines the MsgDeleteApplicationResponse message.
 message MsgDeleteApplicationResponse {}
+
+// MsgCreateContract defines the MsgCreateContract message.
+message MsgCreateContract {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+  uint64 gig_id = 2;
+  uint64 application_id = 3;
+  string client = 4;
+  string freelancer = 5;
+  uint64 price = 6;
+  int64 delivery_deadline = 7;
+  string status = 8;
+  int64 created_at = 9;
+  int64 completed_at = 10;
+}
+
+// MsgCreateContractResponse defines the MsgCreateContractResponse message.
+message MsgCreateContractResponse {
+  uint64 id = 1;
+}
+
+// MsgUpdateContract defines the MsgUpdateContract message.
+message MsgUpdateContract {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+  uint64 id = 2;
+  uint64 gig_id = 3;
+  uint64 application_id = 4;
+  string client = 5;
+  string freelancer = 6;
+  uint64 price = 7;
+  int64 delivery_deadline = 8;
+  string status = 9;
+  int64 created_at = 10;
+  int64 completed_at = 11;
+}
+
+// MsgUpdateContractResponse defines the MsgUpdateContractResponse message.
+message MsgUpdateContractResponse {}
+
+// MsgDeleteContract defines the MsgDeleteContract message.
+message MsgDeleteContract {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+  uint64 id = 2;
+}
+
+// MsgDeleteContractResponse defines the MsgDeleteContractResponse message.
+message MsgDeleteContractResponse {}
