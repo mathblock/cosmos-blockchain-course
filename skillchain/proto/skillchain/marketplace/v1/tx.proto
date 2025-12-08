@@ -29,6 +29,15 @@ service Msg {
 
   // UpdateGigStatus defines the UpdateGigStatus RPC.
   rpc UpdateGigStatus(MsgUpdateGigStatus) returns (MsgUpdateGigStatusResponse);
+
+  // CreateApplication defines the CreateApplication RPC.
+  rpc CreateApplication(MsgCreateApplication) returns (MsgCreateApplicationResponse);
+
+  // UpdateApplication defines the UpdateApplication RPC.
+  rpc UpdateApplication(MsgUpdateApplication) returns (MsgUpdateApplicationResponse);
+
+  // DeleteApplication defines the DeleteApplication RPC.
+  rpc DeleteApplication(MsgDeleteApplication) returns (MsgDeleteApplicationResponse);
 }
 
 // MsgUpdateParams is the Msg/UpdateParams request type.
@@ -106,3 +115,48 @@ message MsgUpdateGigStatus {
 
 // MsgUpdateGigStatusResponse defines the MsgUpdateGigStatusResponse message.
 message MsgUpdateGigStatusResponse {}
+
+// MsgCreateApplication defines the MsgCreateApplication message.
+message MsgCreateApplication {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+  uint64 gig_id = 2;
+  string freelancer = 3;
+  string cover_letter = 4;
+  uint64 proposed_price = 5;
+  uint64 proposed_days = 6;
+  string status = 7;
+  int64 created_at = 8;
+}
+
+// MsgCreateApplicationResponse defines the MsgCreateApplicationResponse message.
+message MsgCreateApplicationResponse {
+  uint64 id = 1;
+}
+
+// MsgUpdateApplication defines the MsgUpdateApplication message.
+message MsgUpdateApplication {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+  uint64 id = 2;
+  uint64 gig_id = 3;
+  string freelancer = 4;
+  string cover_letter = 5;
+  uint64 proposed_price = 6;
+  uint64 proposed_days = 7;
+  string status = 8;
+  int64 created_at = 9;
+}
+
+// MsgUpdateApplicationResponse defines the MsgUpdateApplicationResponse message.
+message MsgUpdateApplicationResponse {}
+
+// MsgDeleteApplication defines the MsgDeleteApplication message.
+message MsgDeleteApplication {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+  uint64 id = 2;
+}
+
+// MsgDeleteApplicationResponse defines the MsgDeleteApplicationResponse message.
+message MsgDeleteApplicationResponse {}

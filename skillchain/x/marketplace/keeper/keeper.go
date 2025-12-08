@@ -22,10 +22,12 @@ type Keeper struct {
 	Schema collections.Schema
 	Params collections.Item[types.Params]
 
-	bankKeeper types.BankKeeper
-	Profile    collections.Map[string, types.Profile]
-	GigSeq     collections.Sequence
-	Gig        collections.Map[uint64, types.Gig]
+	bankKeeper     types.BankKeeper
+	Profile        collections.Map[string, types.Profile]
+	GigSeq         collections.Sequence
+	Gig            collections.Map[uint64, types.Gig]
+	ApplicationSeq collections.Sequence
+	Application    collections.Map[uint64, types.Application]
 }
 
 func NewKeeper(
@@ -51,7 +53,9 @@ func NewKeeper(
 		bankKeeper: bankKeeper,
 		Params:     collections.NewItem(sb, types.ParamsKey, "params", codec.CollValue[types.Params](cdc)),
 		Profile:    collections.NewMap(sb, types.ProfileKey, "profile", collections.StringKey, codec.CollValue[types.Profile](cdc)), Gig: collections.NewMap(sb, types.GigKey, "gig", collections.Uint64Key, codec.CollValue[types.Gig](cdc)),
-		GigSeq: collections.NewSequence(sb, types.GigCountKey, "gigSequence"),
+		GigSeq:         collections.NewSequence(sb, types.GigCountKey, "gigSequence"),
+		Application:    collections.NewMap(sb, types.ApplicationKey, "application", collections.Uint64Key, codec.CollValue[types.Application](cdc)),
+		ApplicationSeq: collections.NewSequence(sb, types.ApplicationCountKey, "applicationSequence"),
 	}
 	schema, err := sb.Build()
 	if err != nil {

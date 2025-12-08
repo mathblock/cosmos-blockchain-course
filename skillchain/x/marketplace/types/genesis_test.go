@@ -21,7 +21,7 @@ func TestGenesisState_Validate(t *testing.T) {
 		},
 		{
 			desc:     "valid genesis state",
-			genState: &types.GenesisState{ProfileMap: []types.Profile{{Owner: "0"}, {Owner: "1"}}, GigList: []types.Gig{{Id: 0}, {Id: 1}}, GigCount: 2}, valid: true,
+			genState: &types.GenesisState{ProfileMap: []types.Profile{{Owner: "0"}, {Owner: "1"}}, GigList: []types.Gig{{Id: 0}, {Id: 1}}, GigCount: 2, ApplicationList: []types.Application{{Id: 0}, {Id: 1}}, ApplicationCount: 2}, valid: true,
 		}, {
 			desc: "duplicated profile",
 			genState: &types.GenesisState{
@@ -34,7 +34,7 @@ func TestGenesisState_Validate(t *testing.T) {
 					},
 				},
 				GigList: []types.Gig{{Id: 0}, {Id: 1}}, GigCount: 2,
-			}, valid: false,
+				ApplicationList: []types.Application{{Id: 0}, {Id: 1}}, ApplicationCount: 2}, valid: false,
 		}, {
 			desc: "duplicated gig",
 			genState: &types.GenesisState{
@@ -46,8 +46,8 @@ func TestGenesisState_Validate(t *testing.T) {
 						Id: 0,
 					},
 				},
-			},
-			valid: false,
+				ApplicationList: []types.Application{{Id: 0}, {Id: 1}}, ApplicationCount: 2,
+			}, valid: false,
 		}, {
 			desc: "invalid gig count",
 			genState: &types.GenesisState{
@@ -56,7 +56,31 @@ func TestGenesisState_Validate(t *testing.T) {
 						Id: 1,
 					},
 				},
-				GigCount: 0,
+				GigCount:        0,
+				ApplicationList: []types.Application{{Id: 0}, {Id: 1}}, ApplicationCount: 2,
+			}, valid: false,
+		}, {
+			desc: "duplicated application",
+			genState: &types.GenesisState{
+				ApplicationList: []types.Application{
+					{
+						Id: 0,
+					},
+					{
+						Id: 0,
+					},
+				},
+			},
+			valid: false,
+		}, {
+			desc: "invalid application count",
+			genState: &types.GenesisState{
+				ApplicationList: []types.Application{
+					{
+						Id: 1,
+					},
+				},
+				ApplicationCount: 0,
 			},
 			valid: false,
 		},

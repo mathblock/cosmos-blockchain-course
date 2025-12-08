@@ -12,7 +12,9 @@ func TestGenesis(t *testing.T) {
 	genesisState := types.GenesisState{
 		Params:     types.DefaultParams(),
 		ProfileMap: []types.Profile{{Owner: "0"}, {Owner: "1"}}, GigList: []types.Gig{{Id: 0}, {Id: 1}},
-		GigCount: 2,
+		GigCount:         2,
+		ApplicationList:  []types.Application{{Id: 0}, {Id: 1}},
+		ApplicationCount: 2,
 	}
 	f := initFixture(t)
 	err := f.keeper.InitGenesis(f.ctx, genesisState)
@@ -25,5 +27,7 @@ func TestGenesis(t *testing.T) {
 	require.EqualExportedValues(t, genesisState.ProfileMap, got.ProfileMap)
 	require.EqualExportedValues(t, genesisState.GigList, got.GigList)
 	require.Equal(t, genesisState.GigCount, got.GigCount)
+	require.EqualExportedValues(t, genesisState.ApplicationList, got.ApplicationList)
+	require.Equal(t, genesisState.ApplicationCount, got.ApplicationCount)
 
 }

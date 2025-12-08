@@ -22,3 +22,8 @@ var (
 	GigKey      = collections.NewPrefix("gig/value/")
 	GigCountKey = collections.NewPrefix("gig/count/")
 )
+
+var (
+	ApplicationKey      = collections.NewPrefix("application/value/")
+	ApplicationCountKey = collections.NewPrefix("application/count/")
+)

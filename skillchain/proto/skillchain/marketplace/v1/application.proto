@@ -1,0 +1,17 @@
+syntax = "proto3";
+package skillchain.marketplace.v1;
+
+option go_package = "skillchain/x/marketplace/types";
+
+// Application defines the Application message.
+message Application {
+  uint64 id = 1;
+  uint64 gig_id = 2;
+  string freelancer = 3;
+  string cover_letter = 4;
+  uint64 proposed_price = 5;
+  uint64 proposed_days = 6;
+  string status = 7;
+  int64 created_at = 8;
+  string creator = 9;
+}

@@ -31,24 +31,24 @@ func (k msgServer) CreateProfile(goCtx context.Context, msg *types.MsgCreateProf
 	}
 
 	if msg.HourlyRate < 10 {
-        return nil, errorsmod.Wrapf(sdkerrors.ErrInvalidRequest, "hourly rate must be at least 10 skill, got %d", msg.HourlyRate)
-    }
+		return nil, errorsmod.Wrapf(sdkerrors.ErrInvalidRequest, "hourly rate must be at least 10 skill, got %d", msg.HourlyRate)
+	}
 
 	if len(msg.Skills) < 1 {
-        return nil, errorsmod.Wrapf(sdkerrors.ErrInvalidRequest, "at least one skill is required, got %d", len(msg.Skills))
-    }
+		return nil, errorsmod.Wrapf(sdkerrors.ErrInvalidRequest, "at least one skill is required, got %d", len(msg.Skills))
+	}
 
 	profile := types.Profile{
-        Owner:       msg.Creator,
-        Name:        msg.Name,
-        Bio:         msg.Bio,
-        Skills:      msg.Skills,
-        HourlyRate:  msg.HourlyRate,
-        TotalJobs:   0,
-        TotalEarned: 0,
-        RatingSum:   0,
-        RatingCount: 0,
-    }
+		Owner:       msg.Creator,
+		Name:        msg.Name,
+		Bio:         msg.Bio,
+		Skills:      msg.Skills,
+		HourlyRate:  msg.HourlyRate,
+		TotalJobs:   0,
+		TotalEarned: 0,
+		RatingSum:   0,
+		RatingCount: 0,
+	}
 
 	err = k.Profile.Set(ctx, profile.Owner, profile)
 	if err != nil {
@@ -56,15 +56,15 @@ func (k msgServer) CreateProfile(goCtx context.Context, msg *types.MsgCreateProf
 	}
 
 	ctx.EventManager().EmitEvent(
-        sdk.NewEvent(
-            "profile_created",
-            sdk.NewAttribute("owner", msg.Creator),
-            sdk.NewAttribute("name", msg.Name),
+		sdk.NewEvent(
+			"profile_created",
+			sdk.NewAttribute("owner", msg.Creator),
+			sdk.NewAttribute("name", msg.Name),
 			sdk.NewAttribute("bio", msg.Bio),
 			sdk.NewAttribute("hourly_rate", string(msg.HourlyRate)),
 			sdk.NewAttribute("skills", string(strings.Join(msg.Skills, ", "))),
-        ),
-    )
+		),
+	)
 
 	return &types.MsgCreateProfileResponse{}, nil
 }

@@ -6,7 +6,7 @@ import "fmt"
 func DefaultGenesis() *GenesisState {
 	return &GenesisState{
 		Params:     DefaultParams(),
-		ProfileMap: []Profile{}, GigList: []Gig{}}
+		ProfileMap: []Profile{}, GigList: []Gig{}, ApplicationList: []Application{}}
 }
 
 // Validate performs basic genesis state validation returning an error upon any
@@ -31,6 +31,17 @@ func (gs GenesisState) Validate() error {
 			return fmt.Errorf("gig id should be lower or equal than the last id")
 		}
 		gigIdMap[elem.Id] = true
+	}
+	applicationIdMap := make(map[uint64]bool)
+	applicationCount := gs.GetApplicationCount()
+	for _, elem := range gs.ApplicationList {
+		if _, ok := applicationIdMap[elem.Id]; ok {
+			return fmt.Errorf("duplicated id for application")
+		}
+		if elem.Id >= applicationCount {
+			return fmt.Errorf("application id should be lower or equal than the last id")
+		}
+		applicationIdMap[elem.Id] = true
 	}
 
 	return gs.Params.Validate()

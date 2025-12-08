@@ -41,6 +41,18 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Alias:          []string{"show-gig"},
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}},
 				},
+				{
+					RpcMethod: "ListApplication",
+					Use:       "list-application",
+					Short:     "List all application",
+				},
+				{
+					RpcMethod:      "GetApplication",
+					Use:            "get-application [id]",
+					Short:          "Gets a application by id",
+					Alias:          []string{"show-application"},
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}},
+				},
 				// this line is used by ignite scaffolding # autocli/query
 			},
 		},
@@ -75,6 +87,24 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Use:            "update-gig-status [gig-id] [status]",
 					Short:          "Send a update-gig-status tx",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "gig_id"}, {ProtoField: "status"}},
+				},
+				{
+					RpcMethod:      "CreateApplication",
+					Use:            "create-application [gig-id] [freelancer] [cover-letter] [proposed-price] [proposed-days] [status] [created-at]",
+					Short:          "Create application",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "gig_id"}, {ProtoField: "freelancer"}, {ProtoField: "cover_letter"}, {ProtoField: "proposed_price"}, {ProtoField: "proposed_days"}, {ProtoField: "status"}, {ProtoField: "created_at"}},
+				},
+				{
+					RpcMethod:      "UpdateApplication",
+					Use:            "update-application [id] [gig-id] [freelancer] [cover-letter] [proposed-price] [proposed-days] [status] [created-at]",
+					Short:          "Update application",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}, {ProtoField: "gig_id"}, {ProtoField: "freelancer"}, {ProtoField: "cover_letter"}, {ProtoField: "proposed_price"}, {ProtoField: "proposed_days"}, {ProtoField: "status"}, {ProtoField: "created_at"}},
+				},
+				{
+					RpcMethod:      "DeleteApplication",
+					Use:            "delete-application [id]",
+					Short:          "Delete application",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}},
 				},
 				// this line is used by ignite scaffolding # autocli/tx
 			},

@@ -22,6 +22,15 @@ func (k Keeper) InitGenesis(ctx context.Context, genState types.GenesisState) er
 	if err := k.GigSeq.Set(ctx, genState.GigCount); err != nil {
 		return err
 	}
+	for _, elem := range genState.ApplicationList {
+		if err := k.Application.Set(ctx, elem.Id, elem); err != nil {
+			return err
+		}
+	}
+
+	if err := k.ApplicationSeq.Set(ctx, genState.ApplicationCount); err != nil {
+		return err
+	}
 
 	return k.Params.Set(ctx, genState.Params)
 }
@@ -50,6 +59,18 @@ func (k Keeper) ExportGenesis(ctx context.Context) (*types.GenesisState, error) 
 	}
 
 	genesis.GigCount, err = k.GigSeq.Peek(ctx)
+	if err != nil {
+		return nil, err
+	}
+	err = k.Application.Walk(ctx, nil, func(key uint64, elem types.Application) (bool, error) {
+		genesis.ApplicationList = append(genesis.ApplicationList, elem)
+		return false, nil
+	})
+	if err != nil {
+		return nil, err
+	}
+
+	genesis.ApplicationCount, err = k.ApplicationSeq.Peek(ctx)
 	if err != nil {
 		return nil, err
 	}

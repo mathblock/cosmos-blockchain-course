@@ -7,6 +7,7 @@ import (
 	simtypes "github.com/cosmos/cosmos-sdk/types/simulation"
 	"github.com/cosmos/cosmos-sdk/x/simulation"
 
+	"skillchain/testutil/sample"
 	marketplacesimulation "skillchain/x/marketplace/simulation"
 	"skillchain/x/marketplace/types"
 )
@@ -18,7 +19,8 @@ func (AppModule) GenerateGenesisState(simState *module.SimulationState) {
 		accs[i] = acc.Address.String()
 	}
 	marketplaceGenesis := types.GenesisState{
-		Params: types.DefaultParams(),
+		Params:          types.DefaultParams(),
+		ApplicationList: []types.Application{{Id: 0, Creator: sample.AccAddress()}, {Id: 1, Creator: sample.AccAddress()}}, ApplicationCount: 2,
 	}
 	simState.GenState[types.ModuleName] = simState.Cdc.MustMarshalJSON(&marketplaceGenesis)
 }
@@ -88,6 +90,51 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 	operations = append(operations, simulation.NewWeightedOperation(
 		weightMsgUpdateGigStatus,
 		marketplacesimulation.SimulateMsgUpdateGigStatus(am.authKeeper, am.bankKeeper, am.keeper, simState.TxConfig),
+	))
+	const (
+		opWeightMsgCreateApplication          = "op_weight_msg_marketplace"
+		defaultWeightMsgCreateApplication int = 100
+	)
+
+	var weightMsgCreateApplication int
+	simState.AppParams.GetOrGenerate(opWeightMsgCreateApplication, &weightMsgCreateApplication, nil,
+		func(_ *rand.Rand) {
+			weightMsgCreateApplication = defaultWeightMsgCreateApplication
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgCreateApplication,
+		marketplacesimulation.SimulateMsgCreateApplication(am.authKeeper, am.bankKeeper, am.keeper, simState.TxConfig),
+	))
+	const (
+		opWeightMsgUpdateApplication          = "op_weight_msg_marketplace"
+		defaultWeightMsgUpdateApplication int = 100
+	)
+
+	var weightMsgUpdateApplication int
+	simState.AppParams.GetOrGenerate(opWeightMsgUpdateApplication, &weightMsgUpdateApplication, nil,
+		func(_ *rand.Rand) {
+			weightMsgUpdateApplication = defaultWeightMsgUpdateApplication
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgUpdateApplication,
+		marketplacesimulation.SimulateMsgUpdateApplication(am.authKeeper, am.bankKeeper, am.keeper, simState.TxConfig),
+	))
+	const (
+		opWeightMsgDeleteApplication          = "op_weight_msg_marketplace"
+		defaultWeightMsgDeleteApplication int = 100
+	)
+
+	var weightMsgDeleteApplication int
+	simState.AppParams.GetOrGenerate(opWeightMsgDeleteApplication, &weightMsgDeleteApplication, nil,
+		func(_ *rand.Rand) {
+			weightMsgDeleteApplication = defaultWeightMsgDeleteApplication
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgDeleteApplication,
+		marketplacesimulation.SimulateMsgDeleteApplication(am.authKeeper, am.bankKeeper, am.keeper, simState.TxConfig),
 	))
 
 	return operations

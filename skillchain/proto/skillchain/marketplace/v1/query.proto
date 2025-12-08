@@ -6,6 +6,7 @@ import "amino/amino.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
+import "skillchain/marketplace/v1/application.proto";
 import "skillchain/marketplace/v1/gig.proto";
 import "skillchain/marketplace/v1/params.proto";
 import "skillchain/marketplace/v1/profile.proto";
@@ -37,6 +38,16 @@ service Query {
   // ListGig defines the ListGig RPC.
   rpc ListGig(QueryAllGigRequest) returns (QueryAllGigResponse) {
     option (google.api.http).get = "/skillchain/marketplace/v1/gig";
+  }
+
+  // ListApplication Queries a list of Application items.
+  rpc GetApplication(QueryGetApplicationRequest) returns (QueryGetApplicationResponse) {
+    option (google.api.http).get = "/skillchain/marketplace/v1/application/{id}";
+  }
+
+  // ListApplication defines the ListApplication RPC.
+  rpc ListApplication(QueryAllApplicationRequest) returns (QueryAllApplicationResponse) {
+    option (google.api.http).get = "/skillchain/marketplace/v1/application";
   }
 }
 
@@ -91,5 +102,26 @@ message QueryAllGigRequest {
 // QueryAllGigResponse defines the QueryAllGigResponse message.
 message QueryAllGigResponse {
   repeated Gig gig = 1 [(gogoproto.nullable) = false];
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+// QueryGetApplicationRequest defines the QueryGetApplicationRequest message.
+message QueryGetApplicationRequest {
+  uint64 id = 1;
+}
+
+// QueryGetApplicationResponse defines the QueryGetApplicationResponse message.
+message QueryGetApplicationResponse {
+  Application application = 1 [(gogoproto.nullable) = false];
+}
+
+// QueryAllApplicationRequest defines the QueryAllApplicationRequest message.
+message QueryAllApplicationRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+// QueryAllApplicationResponse defines the QueryAllApplicationResponse message.
+message QueryAllApplicationResponse {
+  repeated Application application = 1 [(gogoproto.nullable) = false];
   cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }

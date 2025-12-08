@@ -11,9 +11,9 @@ import (
 )
 
 var validStatusTransitions = map[string][]string{
-    "open":        {"cancelled", "in_progress"},
-    "in_progress": {"completed", "disputed"},
-    "disputed":    {"completed", "cancelled"},
+	"open":        {"cancelled", "in_progress"},
+	"in_progress": {"completed", "disputed"},
+	"disputed":    {"completed", "cancelled"},
 }
 
 func (k msgServer) UpdateGigStatus(goCtx context.Context, msg *types.MsgUpdateGigStatus) (*types.MsgUpdateGigStatusResponse, error) {
@@ -30,28 +30,28 @@ func (k msgServer) UpdateGigStatus(goCtx context.Context, msg *types.MsgUpdateGi
 	}
 
 	if gig.Owner != msg.Creator {
-        return nil, errorsmod.Wrap(sdkerrors.ErrUnauthorized, "only gig owner can update status")
-    }
+		return nil, errorsmod.Wrap(sdkerrors.ErrUnauthorized, "only gig owner can update status")
+	}
 
 	allowedTransitions, exists := validStatusTransitions[gig.Status]
-    if !exists {
-        return nil, errorsmod.Wrapf(sdkerrors.ErrInvalidRequest, "gig status %s cannot be changed", gig.Status)
-    }
+	if !exists {
+		return nil, errorsmod.Wrapf(sdkerrors.ErrInvalidRequest, "gig status %s cannot be changed", gig.Status)
+	}
 	isValidTransition := false
-    for _, allowed := range allowedTransitions {
-        if allowed == msg.Status {
-            isValidTransition = true
-            break
-        }
-    }
-    if !isValidTransition {
-        return nil, errorsmod.Wrapf(
-            sdkerrors.ErrInvalidRequest,
-            "cannot transition from %s to %s",
-            gig.Status,
-            msg.Status,
-        )
-    }
+	for _, allowed := range allowedTransitions {
+		if allowed == msg.Status {
+			isValidTransition = true
+			break
+		}
+	}
+	if !isValidTransition {
+		return nil, errorsmod.Wrapf(
+			sdkerrors.ErrInvalidRequest,
+			"cannot transition from %s to %s",
+			gig.Status,
+			msg.Status,
+		)
+	}
 
 	gig.Status = msg.Status
 

@@ -32,12 +32,12 @@ func (k msgServer) CreateGig(goCtx context.Context, msg *types.MsgCreateGig) (*t
 	}
 
 	if msg.DeliveryDays < 1 || msg.DeliveryDays > 365 {
-        return nil, errorsmod.Wrap(sdkerrors.ErrInvalidRequest, "delivery days must be between 1 and 365")
-    }
+		return nil, errorsmod.Wrap(sdkerrors.ErrInvalidRequest, "delivery days must be between 1 and 365")
+	}
 
 	if len(msg.Title) < 5 || len(msg.Title) > 100 {
-        return nil, errorsmod.Wrap(sdkerrors.ErrInvalidRequest, "title must be between 10 and 100 characters")
-    }
+		return nil, errorsmod.Wrap(sdkerrors.ErrInvalidRequest, "title must be between 10 and 100 characters")
+	}
 
 	if len(msg.Description) < 10 || len(msg.Description) > 1000 {
 		return nil, errorsmod.Wrap(sdkerrors.ErrInvalidRequest, "description must be between 10 and 1000 characters")
@@ -50,15 +50,15 @@ func (k msgServer) CreateGig(goCtx context.Context, msg *types.MsgCreateGig) (*t
 
 	gig := types.Gig{
 		Id:           id,
-        Title:        msg.Title,
-        Description:  msg.Description,
-        Owner:        msg.Creator,
-        Price:        msg.Price,
-        Category:     msg.Category,
-        DeliveryDays: msg.DeliveryDays,
-        Status:       "open",
-        CreatedAt:    ctx.BlockTime().Unix(),
-    }
+		Title:        msg.Title,
+		Description:  msg.Description,
+		Owner:        msg.Creator,
+		Price:        msg.Price,
+		Category:     msg.Category,
+		DeliveryDays: msg.DeliveryDays,
+		Status:       "open",
+		CreatedAt:    ctx.BlockTime().Unix(),
+	}
 
 	err = k.Gig.Set(ctx, gig.Id, gig)
 	if err != nil {
@@ -66,17 +66,17 @@ func (k msgServer) CreateGig(goCtx context.Context, msg *types.MsgCreateGig) (*t
 	}
 
 	ctx.EventManager().EmitEvent(
-        sdk.NewEvent(
-            "gig_created",
-            sdk.NewAttribute("owner", msg.Creator),
-            sdk.NewAttribute("title", msg.Title),
+		sdk.NewEvent(
+			"gig_created",
+			sdk.NewAttribute("owner", msg.Creator),
+			sdk.NewAttribute("title", msg.Title),
 			sdk.NewAttribute("description", msg.Description),
 			sdk.NewAttribute("price", string(msg.Price)),
 			sdk.NewAttribute("category", msg.Category),
 			sdk.NewAttribute("status", gig.Status),
 			sdk.NewAttribute("delivery_days", string(msg.DeliveryDays)),
-        ),
-    )
+		),
+	)
 
 	return &types.MsgCreateGigResponse{
 		Id: gig.Id,

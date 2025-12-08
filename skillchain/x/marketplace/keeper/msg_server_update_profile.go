@@ -25,19 +25,19 @@ func (k msgServer) UpdateProfile(goCtx context.Context, msg *types.MsgUpdateProf
 	}
 
 	if msg.HourlyRate < 1 {
-        return nil, errorsmod.Wrap(sdkerrors.ErrInvalidRequest, "hourly rate must be at least 1 skill")
-    }
+		return nil, errorsmod.Wrap(sdkerrors.ErrInvalidRequest, "hourly rate must be at least 1 skill")
+	}
 
 	if len(msg.Skills) < 1 {
 		return nil, errorsmod.Wrap(sdkerrors.ErrInvalidRequest, "at least one skill is required")
 	}
 
 	profile := types.Profile{
-		Owner:       msg.Creator,
-		Name:        msg.Name,
-		Bio:         msg.Bio,
-		Skills:      msg.Skills,
-		HourlyRate:  msg.HourlyRate,
+		Owner:      msg.Creator,
+		Name:       msg.Name,
+		Bio:        msg.Bio,
+		Skills:     msg.Skills,
+		HourlyRate: msg.HourlyRate,
 	}
 
 	err = k.Profile.Set(ctx, profile.Owner, profile)

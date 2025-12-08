@@ -8,8 +8,8 @@ import (
 
 // Default parameter values
 var (
-	DefaultPlatformFeePercent  = uint64(5)      // 5%
-	DefaultMinContractDuration = uint64(86400)  // 1 days in secondes
+	DefaultPlatformFeePercent  = uint64(5)        // 5%
+	DefaultMinContractDuration = uint64(86400)    // 1 days in secondes
 	DefaultMinGigPrice         = math.NewInt(100) // 100 SKILL
 )
 
