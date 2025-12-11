@@ -182,6 +182,36 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 		weightMsgDeleteContract,
 		marketplacesimulation.SimulateMsgDeleteContract(am.authKeeper, am.bankKeeper, am.keeper, simState.TxConfig),
 	))
+	const (
+		opWeightMsgApplyToGig          = "op_weight_msg_marketplace"
+		defaultWeightMsgApplyToGig int = 100
+	)
+
+	var weightMsgApplyToGig int
+	simState.AppParams.GetOrGenerate(opWeightMsgApplyToGig, &weightMsgApplyToGig, nil,
+		func(_ *rand.Rand) {
+			weightMsgApplyToGig = defaultWeightMsgApplyToGig
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgApplyToGig,
+		marketplacesimulation.SimulateMsgApplyToGig(am.authKeeper, am.bankKeeper, am.keeper, simState.TxConfig),
+	))
+	const (
+		opWeightMsgWithdrawApplication          = "op_weight_msg_marketplace"
+		defaultWeightMsgWithdrawApplication int = 100
+	)
+
+	var weightMsgWithdrawApplication int
+	simState.AppParams.GetOrGenerate(opWeightMsgWithdrawApplication, &weightMsgWithdrawApplication, nil,
+		func(_ *rand.Rand) {
+			weightMsgWithdrawApplication = defaultWeightMsgWithdrawApplication
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgWithdrawApplication,
+		marketplacesimulation.SimulateMsgWithdrawApplication(am.authKeeper, am.bankKeeper, am.keeper, simState.TxConfig),
+	))
 
 	return operations
 }

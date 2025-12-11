@@ -136,6 +136,18 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Short:          "Delete contract",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}},
 				},
+				{
+					RpcMethod:      "ApplyToGig",
+					Use:            "apply-to-gig [gig-id] [cover-letter] [proposed-price] [proposed-days]",
+					Short:          "Send a apply-to-gig tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "gig_id"}, {ProtoField: "cover_letter"}, {ProtoField: "proposed_price"}, {ProtoField: "proposed_days"}},
+				},
+				{
+					RpcMethod:      "WithdrawApplication",
+					Use:            "withdraw-application [application-id]",
+					Short:          "Send a withdraw-application tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "application_id"}},
+				},
 				// this line is used by ignite scaffolding # autocli/tx
 			},
 		},
