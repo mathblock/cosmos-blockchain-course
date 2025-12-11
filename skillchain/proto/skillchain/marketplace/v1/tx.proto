@@ -59,6 +59,15 @@ service Msg {
 
   // RejectApplication defines the RejectApplication RPC.
   rpc RejectApplication(MsgRejectApplication) returns (MsgRejectApplicationResponse);
+
+  // DeliverContract defines the DeliverContract RPC.
+  rpc DeliverContract(MsgDeliverContract) returns (MsgDeliverContractResponse);
+
+  // CompleteContract defines the CompleteContract RPC.
+  rpc CompleteContract(MsgCompleteContract) returns (MsgCompleteContractResponse);
+
+  // DisputeContract defines the DisputeContract RPC.
+  rpc DisputeContract(MsgDisputeContract) returns (MsgDisputeContractResponse);
 }
 
 // MsgUpdateParams is the Msg/UpdateParams request type.
@@ -273,3 +282,35 @@ message MsgRejectApplication {
 
 // MsgRejectApplicationResponse defines the MsgRejectApplicationResponse message.
 message MsgRejectApplicationResponse {}
+
+// MsgDeliverContract defines the MsgDeliverContract message.
+message MsgDeliverContract {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+  uint64 contract_id = 2;
+  string delivery_note = 3;
+}
+
+// MsgDeliverContractResponse defines the MsgDeliverContractResponse message.
+message MsgDeliverContractResponse {}
+
+// MsgCompleteContract defines the MsgCompleteContract message.
+message MsgCompleteContract {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+  uint64 contract_id = 2;
+}
+
+// MsgCompleteContractResponse defines the MsgCompleteContractResponse message.
+message MsgCompleteContractResponse {}
+
+// MsgDisputeContract defines the MsgDisputeContract message.
+message MsgDisputeContract {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+  uint64 contract_id = 2;
+  string reason = 3;
+}
+
+// MsgDisputeContractResponse defines the MsgDisputeContractResponse message.
+message MsgDisputeContractResponse {}

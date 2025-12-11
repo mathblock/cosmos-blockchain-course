@@ -8,6 +8,18 @@ import (
 
 func RegisterInterfaces(registrar codectypes.InterfaceRegistry) {
 	registrar.RegisterImplementations((*sdk.Msg)(nil),
+		&MsgDisputeContract{},
+	)
+
+	registrar.RegisterImplementations((*sdk.Msg)(nil),
+		&MsgCompleteContract{},
+	)
+
+	registrar.RegisterImplementations((*sdk.Msg)(nil),
+		&MsgDeliverContract{},
+	)
+
+	registrar.RegisterImplementations((*sdk.Msg)(nil),
 		&MsgRejectApplication{},
 	)
 

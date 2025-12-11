@@ -242,6 +242,51 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 		weightMsgRejectApplication,
 		marketplacesimulation.SimulateMsgRejectApplication(am.authKeeper, am.bankKeeper, am.keeper, simState.TxConfig),
 	))
+	const (
+		opWeightMsgDeliverContract          = "op_weight_msg_marketplace"
+		defaultWeightMsgDeliverContract int = 100
+	)
+
+	var weightMsgDeliverContract int
+	simState.AppParams.GetOrGenerate(opWeightMsgDeliverContract, &weightMsgDeliverContract, nil,
+		func(_ *rand.Rand) {
+			weightMsgDeliverContract = defaultWeightMsgDeliverContract
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgDeliverContract,
+		marketplacesimulation.SimulateMsgDeliverContract(am.authKeeper, am.bankKeeper, am.keeper, simState.TxConfig),
+	))
+	const (
+		opWeightMsgCompleteContract          = "op_weight_msg_marketplace"
+		defaultWeightMsgCompleteContract int = 100
+	)
+
+	var weightMsgCompleteContract int
+	simState.AppParams.GetOrGenerate(opWeightMsgCompleteContract, &weightMsgCompleteContract, nil,
+		func(_ *rand.Rand) {
+			weightMsgCompleteContract = defaultWeightMsgCompleteContract
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgCompleteContract,
+		marketplacesimulation.SimulateMsgCompleteContract(am.authKeeper, am.bankKeeper, am.keeper, simState.TxConfig),
+	))
+	const (
+		opWeightMsgDisputeContract          = "op_weight_msg_marketplace"
+		defaultWeightMsgDisputeContract int = 100
+	)
+
+	var weightMsgDisputeContract int
+	simState.AppParams.GetOrGenerate(opWeightMsgDisputeContract, &weightMsgDisputeContract, nil,
+		func(_ *rand.Rand) {
+			weightMsgDisputeContract = defaultWeightMsgDisputeContract
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgDisputeContract,
+		marketplacesimulation.SimulateMsgDisputeContract(am.authKeeper, am.bankKeeper, am.keeper, simState.TxConfig),
+	))
 
 	return operations
 }
