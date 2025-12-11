@@ -273,7 +273,9 @@ message MsgAcceptApplication {
 }
 
 // MsgAcceptApplicationResponse defines the MsgAcceptApplicationResponse message.
-message MsgAcceptApplicationResponse {}
+message MsgAcceptApplicationResponse {
+  uint64 contract_id = 1;
+}
 
 // MsgRejectApplication defines the MsgRejectApplication message.
 message MsgRejectApplication {
