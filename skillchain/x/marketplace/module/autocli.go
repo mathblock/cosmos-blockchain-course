@@ -166,6 +166,12 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Short:          "Send a deliver-contract tx",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "contract_id"}, {ProtoField: "delivery_note"}},
 				},
+				{
+					RpcMethod:      "CompleteContract",
+					Use:            "complete-contract [contract-id]",
+					Short:          "Send a complete-contract tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "contract_id"}},
+				},
 				// this line is used by ignite scaffolding # autocli/tx
 			},
 		},
