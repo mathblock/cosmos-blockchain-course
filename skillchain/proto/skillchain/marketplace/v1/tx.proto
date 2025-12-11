@@ -251,7 +251,9 @@ message MsgApplyToGig {
 }
 
 // MsgApplyToGigResponse defines the MsgApplyToGigResponse message.
-message MsgApplyToGigResponse {}
+message MsgApplyToGigResponse {
+  uint64 application_id = 1;
+}
 
 // MsgWithdrawApplication defines the MsgWithdrawApplication message.
 message MsgWithdrawApplication {
