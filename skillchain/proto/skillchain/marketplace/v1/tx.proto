@@ -56,6 +56,9 @@ service Msg {
 
   // AcceptApplication defines the AcceptApplication RPC.
   rpc AcceptApplication(MsgAcceptApplication) returns (MsgAcceptApplicationResponse);
+
+  // RejectApplication defines the RejectApplication RPC.
+  rpc RejectApplication(MsgRejectApplication) returns (MsgRejectApplicationResponse);
 }
 
 // MsgUpdateParams is the Msg/UpdateParams request type.
@@ -260,3 +263,13 @@ message MsgAcceptApplication {
 
 // MsgAcceptApplicationResponse defines the MsgAcceptApplicationResponse message.
 message MsgAcceptApplicationResponse {}
+
+// MsgRejectApplication defines the MsgRejectApplication message.
+message MsgRejectApplication {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+  uint64 application_id = 2;
+}
+
+// MsgRejectApplicationResponse defines the MsgRejectApplicationResponse message.
+message MsgRejectApplicationResponse {}

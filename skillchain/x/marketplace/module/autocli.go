@@ -154,6 +154,12 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Short:          "Send a accept-application tx",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "application_id"}},
 				},
+				{
+					RpcMethod:      "RejectApplication",
+					Use:            "reject-application [application-id]",
+					Short:          "Send a reject-application tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "application_id"}},
+				},
 				// this line is used by ignite scaffolding # autocli/tx
 			},
 		},
