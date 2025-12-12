@@ -5,9 +5,10 @@ import (
 	"fmt"
 
 	"skillchain/x/marketplace/types"
+
+	errorsmod "cosmossdk.io/errors"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
-	errorsmod "cosmossdk.io/errors"
 )
 
 func (k msgServer) WithdrawApplication(goCtx context.Context, msg *types.MsgWithdrawApplication) (*types.MsgWithdrawApplicationResponse, error) {
@@ -24,16 +25,16 @@ func (k msgServer) WithdrawApplication(goCtx context.Context, msg *types.MsgWith
 	}
 
 	if application.Freelancer != msg.Creator {
-        return nil, errorsmod.Wrap(types.ErrUnauthorized, "only the freelancer can withdraw their application")
-    }
+		return nil, errorsmod.Wrap(types.ErrUnauthorized, "only the freelancer can withdraw their application")
+	}
 
 	if application.Status != "pending" {
-        return nil, errorsmod.Wrapf(
-            sdkerrors.ErrInvalidRequest,
-            "can only withdraw pending applications (current status: %s)",
-            application.Status,
-        )
-    }
+		return nil, errorsmod.Wrapf(
+			sdkerrors.ErrInvalidRequest,
+			"can only withdraw pending applications (current status: %s)",
+			application.Status,
+		)
+	}
 
 	application.Status = "withdrawn"
 	err = k.Application.Set(ctx, application.Id, application)

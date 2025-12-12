@@ -25,43 +25,43 @@ func (k msgServer) ApplyToGig(goCtx context.Context, msg *types.MsgApplyToGig) (
 	}
 
 	if gig.Status != "open" {
-        return nil, errorsmod.Wrapf(
-            sdkerrors.ErrInvalidRequest, 
-            "gig %d is not open for applications (status: %s)", 
-            msg.GigId, 
-            gig.Status,
-        )
-    }
+		return nil, errorsmod.Wrapf(
+			sdkerrors.ErrInvalidRequest,
+			"gig %d is not open for applications (status: %s)",
+			msg.GigId,
+			gig.Status,
+		)
+	}
 
 	_, err = k.Profile.Get(ctx, msg.Creator)
-    if err != nil {
-        return nil, errorsmod.Wrap(sdkerrors.ErrInvalidRequest, "freelancer must have a profile to apply")
-    }
+	if err != nil {
+		return nil, errorsmod.Wrap(sdkerrors.ErrInvalidRequest, "freelancer must have a profile to apply")
+	}
 
 	if gig.Owner == msg.Creator {
-        return nil, errorsmod.Wrap(sdkerrors.ErrInvalidRequest, "cannot apply to your own gig")
-    }
-    
-    applicationFound := false
-    k.Application.Walk(ctx, nil, func(_ uint64, app types.Application) (stop bool, err error) {
-        if app.GigId == msg.GigId && app.Freelancer == msg.Creator && app.Status == "pending" {
-            applicationFound = true
-            return true, nil
-        }
-        return false, nil
-    })
-    if applicationFound {
-        return nil, errorsmod.Wrap(sdkerrors.ErrInvalidRequest, "you already have a pending application for this gig")
-    }
+		return nil, errorsmod.Wrap(sdkerrors.ErrInvalidRequest, "cannot apply to your own gig")
+	}
 
-    params, err := k.Params.Get(ctx)
-    if err != nil {
-        return nil, errorsmod.Wrap(err, "failed to get marketplace parameters")
-    }
+	applicationFound := false
+	k.Application.Walk(ctx, nil, func(_ uint64, app types.Application) (stop bool, err error) {
+		if app.GigId == msg.GigId && app.Freelancer == msg.Creator && app.Status == "pending" {
+			applicationFound = true
+			return true, nil
+		}
+		return false, nil
+	})
+	if applicationFound {
+		return nil, errorsmod.Wrap(sdkerrors.ErrInvalidRequest, "you already have a pending application for this gig")
+	}
 
-    if math.NewInt(int64(msg.ProposedPrice)).LT(params.MinGigPrice) {
-        return nil, errorsmod.Wrap(types.ErrInvalidPrice, "proposed price is below minimum")
-    }
+	params, err := k.Params.Get(ctx)
+	if err != nil {
+		return nil, errorsmod.Wrap(err, "failed to get marketplace parameters")
+	}
+
+	if math.NewInt(int64(msg.ProposedPrice)).LT(params.MinGigPrice) {
+		return nil, errorsmod.Wrap(types.ErrInvalidPrice, "proposed price is below minimum")
+	}
 
 	id, err := k.ApplicationSeq.Next(ctx)
 	if err != nil {
@@ -69,12 +69,12 @@ func (k msgServer) ApplyToGig(goCtx context.Context, msg *types.MsgApplyToGig) (
 	}
 
 	application := types.Application{
-		Id:         id,
-		GigId:      msg.GigId,
-		Freelancer: msg.Creator,
+		Id:            id,
+		GigId:         msg.GigId,
+		Freelancer:    msg.Creator,
 		ProposedPrice: msg.ProposedPrice,
-		CoverLetter: msg.CoverLetter,
-		Status:     "pending",
+		CoverLetter:   msg.CoverLetter,
+		Status:        "pending",
 	}
 
 	err = k.Application.Set(ctx, application.Id, application)
@@ -93,7 +93,7 @@ func (k msgServer) ApplyToGig(goCtx context.Context, msg *types.MsgApplyToGig) (
 		),
 	)
 
-    return &types.MsgApplyToGigResponse{
+	return &types.MsgApplyToGigResponse{
 		ApplicationId: application.Id,
 	}, nil
 }

@@ -5,9 +5,10 @@ import (
 	"fmt"
 
 	"skillchain/x/marketplace/types"
+
+	errorsmod "cosmossdk.io/errors"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
-	errorsmod "cosmossdk.io/errors"
 )
 
 func (k msgServer) RejectApplication(goCtx context.Context, msg *types.MsgRejectApplication) (*types.MsgRejectApplicationResponse, error) {
@@ -33,12 +34,12 @@ func (k msgServer) RejectApplication(goCtx context.Context, msg *types.MsgReject
 	}
 
 	if application.Status != "pending" {
-        return nil, errorsmod.Wrapf(
-            sdkerrors.ErrInvalidRequest,
-            "can only reject pending applications (current status: %s)",
-            application.Status,
-        )
-    }
+		return nil, errorsmod.Wrapf(
+			sdkerrors.ErrInvalidRequest,
+			"can only reject pending applications (current status: %s)",
+			application.Status,
+		)
+	}
 
 	application.Status = "rejected"
 	err = k.Application.Set(ctx, application.Id, application)

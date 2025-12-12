@@ -65,6 +65,13 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Alias:          []string{"show-contract"},
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}},
 				},
+				{
+					RpcMethod:      "ApplicationsByGig",
+					Use:            "applications-by-gig [gig-id]",
+					Short:          "Query applications-by-gig",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "gig_id"}},
+				},
+
 				// this line is used by ignite scaffolding # autocli/query
 			},
 		},

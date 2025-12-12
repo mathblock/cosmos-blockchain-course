@@ -60,6 +60,11 @@ service Query {
   rpc ListContract(QueryAllContractRequest) returns (QueryAllContractResponse) {
     option (google.api.http).get = "/skillchain/marketplace/v1/contract";
   }
+
+  // ApplicationsByGig Queries a list of ApplicationsByGig items.
+  rpc ApplicationsByGig(QueryApplicationsByGigRequest) returns (QueryApplicationsByGigResponse) {
+    option (google.api.http).get = "/skillchain/marketplace/v1/applications_by_gig/{gig_id}";
+  }
 }
 
 // QueryParamsRequest is request type for the Query/Params RPC method.
@@ -156,4 +161,14 @@ message QueryAllContractRequest {
 message QueryAllContractResponse {
   repeated Contract contract = 1 [(gogoproto.nullable) = false];
   cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+// QueryApplicationsByGigRequest defines the QueryApplicationsByGigRequest message.
+message QueryApplicationsByGigRequest {
+  uint64 gig_id = 1;
+}
+
+// QueryApplicationsByGigResponse defines the QueryApplicationsByGigResponse message.
+message QueryApplicationsByGigResponse {
+  Application applications = 1;
 }

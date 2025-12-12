@@ -5,8 +5,9 @@ import (
 	"fmt"
 
 	"skillchain/x/marketplace/types"
-	sdk "github.com/cosmos/cosmos-sdk/types"
+
 	errorsmod "cosmossdk.io/errors"
+	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
 
@@ -24,13 +25,13 @@ func (k msgServer) AcceptApplication(goCtx context.Context, msg *types.MsgAccept
 	}
 
 	if application.Status != "pending" {
-        return nil, errorsmod.Wrapf(
-            sdkerrors.ErrInvalidRequest,
-            "application %d is not pending (status: %s)",
-            msg.ApplicationId,
-            application.Status,
-        )
-    }
+		return nil, errorsmod.Wrapf(
+			sdkerrors.ErrInvalidRequest,
+			"application %d is not pending (status: %s)",
+			msg.ApplicationId,
+			application.Status,
+		)
+	}
 
 	gig, err := k.Gig.Get(ctx, application.GigId)
 	if err != nil {
@@ -46,8 +47,8 @@ func (k msgServer) AcceptApplication(goCtx context.Context, msg *types.MsgAccept
 	}
 
 	if gig.Status != "open" {
-        return nil, errorsmod.Wrap(sdkerrors.ErrInvalidRequest, "gig is no longer open")
-    }
+		return nil, errorsmod.Wrap(sdkerrors.ErrInvalidRequest, "gig is no longer open")
+	}
 
 	application.Status = "accepted"
 	err = k.Application.Set(ctx, application.Id, application)
@@ -74,7 +75,7 @@ func (k msgServer) AcceptApplication(goCtx context.Context, msg *types.MsgAccept
 		ApplicationId:    application.Id,
 		Client:           gig.Owner,
 		Freelancer:       application.Freelancer,
-		Price:		   	  application.ProposedPrice,
+		Price:            application.ProposedPrice,
 		DeliveryDeadline: deliveryDeadline,
 		Status:           "active",
 		CreatedAt:        ctx.BlockTime().Unix(),
