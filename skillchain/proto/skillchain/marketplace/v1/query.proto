@@ -70,6 +70,11 @@ service Query {
   rpc ApplicationsByFreelancer(QueryApplicationsByFreelancerRequest) returns (QueryApplicationsByFreelancerResponse) {
     option (google.api.http).get = "/skillchain/marketplace/v1/applications_by_freelancer/{freelancer}";
   }
+
+  // ContractsByUser Queries a list of ContractsByUser items.
+  rpc ContractsByUser(QueryContractsByUserRequest) returns (QueryContractsByUserResponse) {
+    option (google.api.http).get = "/skillchain/marketplace/v1/contracts_by_user/{user}";
+  }
 }
 
 // QueryParamsRequest is request type for the Query/Params RPC method.
@@ -186,4 +191,14 @@ message QueryApplicationsByFreelancerRequest {
 // QueryApplicationsByFreelancerResponse defines the QueryApplicationsByFreelancerResponse message.
 message QueryApplicationsByFreelancerResponse {
   Application applications = 1;
+}
+
+// QueryContractsByUserRequest defines the QueryContractsByUserRequest message.
+message QueryContractsByUserRequest {
+  string user = 1;
+}
+
+// QueryContractsByUserResponse defines the QueryContractsByUserResponse message.
+message QueryContractsByUserResponse {
+  Contract contracts = 1;
 }
