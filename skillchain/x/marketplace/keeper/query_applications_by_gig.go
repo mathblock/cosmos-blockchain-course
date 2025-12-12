@@ -18,7 +18,7 @@ func (q queryServer) ApplicationsByGig(goCtx context.Context, req *types.QueryAp
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	var applications []types.Application
-	
+
 	// Use Walk with nil ranger to iterate all items
 	err := q.k.Application.Walk(ctx, nil, func(key uint64, application types.Application) (stop bool, err error) {
 		// Filter by GigId during iteration (more efficient)

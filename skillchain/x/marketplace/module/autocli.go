@@ -93,6 +93,13 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "gig_id"}},
 				},
 
+				{
+					RpcMethod:      "EscrowBalance",
+					Use:            "escrow-balance ",
+					Short:          "Query escrow-balance",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{},
+				},
+
 				// this line is used by ignite scaffolding # autocli/query
 			},
 		},

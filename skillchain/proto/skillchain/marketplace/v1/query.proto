@@ -80,6 +80,11 @@ service Query {
   rpc ContractByGig(QueryContractByGigRequest) returns (QueryContractByGigResponse) {
     option (google.api.http).get = "/skillchain/marketplace/v1/contract_by_gig/{gig_id}";
   }
+
+  // EscrowBalance Queries a list of EscrowBalance items.
+  rpc EscrowBalance(QueryEscrowBalanceRequest) returns (QueryEscrowBalanceResponse) {
+    option (google.api.http).get = "/skillchain/marketplace/v1/escrow_balance";
+  }
 }
 
 // QueryParamsRequest is request type for the Query/Params RPC method.
@@ -216,4 +221,12 @@ message QueryContractByGigRequest {
 // QueryContractByGigResponse defines the QueryContractByGigResponse message.
 message QueryContractByGigResponse {
   Contract contract = 1;
+}
+
+// QueryEscrowBalanceRequest defines the QueryEscrowBalanceRequest message.
+message QueryEscrowBalanceRequest {}
+
+// QueryEscrowBalanceResponse defines the QueryEscrowBalanceResponse message.
+message QueryEscrowBalanceResponse {
+  string balance = 1;
 }

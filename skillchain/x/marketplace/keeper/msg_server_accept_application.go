@@ -5,6 +5,7 @@ import (
 	"fmt"
 
 	"skillchain/x/marketplace/types"
+
 	math "cosmossdk.io/math"
 
 	errorsmod "cosmossdk.io/errors"
@@ -52,31 +53,31 @@ func (k msgServer) AcceptApplication(goCtx context.Context, msg *types.MsgAccept
 	}
 
 	clientAddr, err := sdk.AccAddressFromBech32(gig.Owner)
-    if err != nil {
-        return nil, errorsmod.Wrap(sdkerrors.ErrInvalidAddress, "invalid client address")
-    }
+	if err != nil {
+		return nil, errorsmod.Wrap(sdkerrors.ErrInvalidAddress, "invalid client address")
+	}
 
 	escrowAmount := sdk.NewCoins(sdk.NewCoin("skill", math.NewIntFromUint64(application.ProposedPrice)))
 
 	clientBalance := k.bankKeeper.GetBalance(ctx, clientAddr, "skill")
-    if clientBalance.Amount.LT(math.NewIntFromUint64(application.ProposedPrice)) {
-        return nil, errorsmod.Wrapf(
-            types.ErrInsufficientFunds,
-            "client has %s but needs %s",
-            clientBalance.String(),
-            escrowAmount.String(),
-        )
-    }
+	if clientBalance.Amount.LT(math.NewIntFromUint64(application.ProposedPrice)) {
+		return nil, errorsmod.Wrapf(
+			types.ErrInsufficientFunds,
+			"client has %s but needs %s",
+			clientBalance.String(),
+			escrowAmount.String(),
+		)
+	}
 
 	err = k.bankKeeper.SendCoinsFromAccountToModule(
-        ctx,
-        clientAddr,
-        types.ModuleName,
-        escrowAmount,
-    )
-    if err != nil {
-        return nil, errorsmod.Wrap(err, "failed to lock funds in escrow")
-    }
+		ctx,
+		clientAddr,
+		types.ModuleName,
+		escrowAmount,
+	)
+	if err != nil {
+		return nil, errorsmod.Wrap(err, "failed to lock funds in escrow")
+	}
 
 	application.Status = "accepted"
 	err = k.Application.Set(ctx, application.Id, application)
@@ -128,11 +129,11 @@ func (k msgServer) AcceptApplication(goCtx context.Context, msg *types.MsgAccept
 
 	ctx.EventManager().EmitEvents(sdk.Events{
 		sdk.NewEvent(
-            "funds_locked_in_escrow",
-            sdk.NewAttribute("contract_id", fmt.Sprintf("%d", contractId)),
-            sdk.NewAttribute("client", gig.Owner),
-            sdk.NewAttribute("amount", escrowAmount.String()),
-        ),
+			"funds_locked_in_escrow",
+			sdk.NewAttribute("contract_id", fmt.Sprintf("%d", contractId)),
+			sdk.NewAttribute("client", gig.Owner),
+			sdk.NewAttribute("amount", escrowAmount.String()),
+		),
 		sdk.NewEvent(
 			"accept_application",
 			sdk.NewAttribute("ApplicationId", fmt.Sprintf("%d", application.Id)),
