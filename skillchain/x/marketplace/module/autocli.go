@@ -86,6 +86,13 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "user"}},
 				},
 
+				{
+					RpcMethod:      "ContractByGig",
+					Use:            "contract-by-gig [gig-id]",
+					Short:          "Query contract-by-gig",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "gig_id"}},
+				},
+
 				// this line is used by ignite scaffolding # autocli/query
 			},
 		},

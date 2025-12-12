@@ -75,6 +75,11 @@ service Query {
   rpc ContractsByUser(QueryContractsByUserRequest) returns (QueryContractsByUserResponse) {
     option (google.api.http).get = "/skillchain/marketplace/v1/contracts_by_user/{user}";
   }
+
+  // ContractByGig Queries a list of ContractByGig items.
+  rpc ContractByGig(QueryContractByGigRequest) returns (QueryContractByGigResponse) {
+    option (google.api.http).get = "/skillchain/marketplace/v1/contract_by_gig/{gig_id}";
+  }
 }
 
 // QueryParamsRequest is request type for the Query/Params RPC method.
@@ -201,4 +206,14 @@ message QueryContractsByUserRequest {
 // QueryContractsByUserResponse defines the QueryContractsByUserResponse message.
 message QueryContractsByUserResponse {
   Contract contracts = 1;
+}
+
+// QueryContractByGigRequest defines the QueryContractByGigRequest message.
+message QueryContractByGigRequest {
+  uint64 gig_id = 1;
+}
+
+// QueryContractByGigResponse defines the QueryContractByGigResponse message.
+message QueryContractByGigResponse {
+  Contract contract = 1;
 }
