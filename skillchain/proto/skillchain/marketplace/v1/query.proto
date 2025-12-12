@@ -65,6 +65,11 @@ service Query {
   rpc ApplicationsByGig(QueryApplicationsByGigRequest) returns (QueryApplicationsByGigResponse) {
     option (google.api.http).get = "/skillchain/marketplace/v1/applications_by_gig/{gig_id}";
   }
+
+  // ApplicationsByFreelancer Queries a list of ApplicationsByFreelancer items.
+  rpc ApplicationsByFreelancer(QueryApplicationsByFreelancerRequest) returns (QueryApplicationsByFreelancerResponse) {
+    option (google.api.http).get = "/skillchain/marketplace/v1/applications_by_freelancer/{freelancer}";
+  }
 }
 
 // QueryParamsRequest is request type for the Query/Params RPC method.
@@ -170,5 +175,15 @@ message QueryApplicationsByGigRequest {
 
 // QueryApplicationsByGigResponse defines the QueryApplicationsByGigResponse message.
 message QueryApplicationsByGigResponse {
+  Application applications = 1;
+}
+
+// QueryApplicationsByFreelancerRequest defines the QueryApplicationsByFreelancerRequest message.
+message QueryApplicationsByFreelancerRequest {
+  string freelancer = 1;
+}
+
+// QueryApplicationsByFreelancerResponse defines the QueryApplicationsByFreelancerResponse message.
+message QueryApplicationsByFreelancerResponse {
   Application applications = 1;
 }
