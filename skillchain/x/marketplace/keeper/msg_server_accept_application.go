@@ -62,6 +62,17 @@ func (k msgServer) AcceptApplication(goCtx context.Context, msg *types.MsgAccept
 		return nil, errorsmod.Wrapf(sdkerrors.ErrUnknownRequest, "failed to update gig status: %v", err)
 	}
 
+	err = k.Application.Walk(ctx, nil, func(key uint64, application types.Application) (stop bool, err error) {
+		if application.GigId == gig.Id && application.Id != msg.ApplicationId && application.Status == "pending" {
+			application.Status = "rejected"
+			err = k.Application.Set(ctx, application.Id, application)
+		}
+		return false, nil
+	})
+	if err != nil {
+		return nil, errorsmod.Wrapf(sdkerrors.ErrUnknownRequest, "failed to reject other applications: %v", err)
+	}
+
 	deliveryDeadline := ctx.BlockTime().Unix() + int64(application.ProposedDays*86400)
 
 	contractId, err := k.ContractSeq.Next(ctx)
