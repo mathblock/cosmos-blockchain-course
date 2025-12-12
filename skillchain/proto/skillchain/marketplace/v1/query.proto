@@ -185,7 +185,7 @@ message QueryApplicationsByGigRequest {
 
 // QueryApplicationsByGigResponse defines the QueryApplicationsByGigResponse message.
 message QueryApplicationsByGigResponse {
-  Application applications = 1;
+  repeated Application applications = 1 [(gogoproto.nullable) = false];
 }
 
 // QueryApplicationsByFreelancerRequest defines the QueryApplicationsByFreelancerRequest message.
@@ -195,7 +195,7 @@ message QueryApplicationsByFreelancerRequest {
 
 // QueryApplicationsByFreelancerResponse defines the QueryApplicationsByFreelancerResponse message.
 message QueryApplicationsByFreelancerResponse {
-  Application applications = 1;
+  repeated Application applications = 1 [(gogoproto.nullable) = false];
 }
 
 // QueryContractsByUserRequest defines the QueryContractsByUserRequest message.
@@ -205,7 +205,7 @@ message QueryContractsByUserRequest {
 
 // QueryContractsByUserResponse defines the QueryContractsByUserResponse message.
 message QueryContractsByUserResponse {
-  Contract contracts = 1;
+  repeated Contract contracts = 1 [(gogoproto.nullable) = false];
 }
 
 // QueryContractByGigRequest defines the QueryContractByGigRequest message.
