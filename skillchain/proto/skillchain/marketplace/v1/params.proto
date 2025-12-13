@@ -25,4 +25,13 @@ message Params {
     (gogoproto.nullable) = false,
     (amino.dont_omitempty) = true
   ];
+
+  // Defines the duration of disputes in seconds
+  uint64 dispute_duration = 4;    
+
+  // Defines the minimum number of arbiters required for a dispute    
+  uint64 min_arbiters_required = 5;   
+
+  // Defines the stake required for arbiters
+  uint64 arbiter_stake_required = 6; 
 }
