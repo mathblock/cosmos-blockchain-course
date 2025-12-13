@@ -49,6 +49,11 @@ func (k Keeper) InitGenesis(ctx context.Context, genState types.GenesisState) er
 	if err := k.DisputeSeq.Set(ctx, genState.DisputeCount); err != nil {
 		return err
 	}
+	for _, elem := range genState.DisputeVoteMap {
+		if err := k.DisputeVote.Set(ctx, elem.Arbiter, elem); err != nil {
+			return err
+		}
+	}
 
 	return k.Params.Set(ctx, genState.Params)
 }
@@ -114,6 +119,12 @@ func (k Keeper) ExportGenesis(ctx context.Context) (*types.GenesisState, error) 
 
 	genesis.DisputeCount, err = k.DisputeSeq.Peek(ctx)
 	if err != nil {
+		return nil, err
+	}
+	if err := k.DisputeVote.Walk(ctx, nil, func(_ string, val types.DisputeVote) (stop bool, err error) {
+		genesis.DisputeVoteMap = append(genesis.DisputeVoteMap, val)
+		return false, nil
+	}); err != nil {
 		return nil, err
 	}
 

@@ -10,6 +10,7 @@ import "google/api/annotations.proto";
 import "skillchain/marketplace/v1/application.proto";
 import "skillchain/marketplace/v1/contract.proto";
 import "skillchain/marketplace/v1/dispute.proto";
+import "skillchain/marketplace/v1/dispute_vote.proto";
 import "skillchain/marketplace/v1/gig.proto";
 import "skillchain/marketplace/v1/params.proto";
 import "skillchain/marketplace/v1/profile.proto";
@@ -96,6 +97,16 @@ service Query {
   // ListDispute defines the ListDispute RPC.
   rpc ListDispute(QueryAllDisputeRequest) returns (QueryAllDisputeResponse) {
     option (google.api.http).get = "/skillchain/marketplace/v1/dispute";
+  }
+
+  // ListDisputeVote Queries a list of DisputeVote items.
+  rpc GetDisputeVote(QueryGetDisputeVoteRequest) returns (QueryGetDisputeVoteResponse) {
+    option (google.api.http).get = "/skillchain/marketplace/v1/dispute_vote/{arbiter}";
+  }
+
+  // ListDisputeVote defines the ListDisputeVote RPC.
+  rpc ListDisputeVote(QueryAllDisputeVoteRequest) returns (QueryAllDisputeVoteResponse) {
+    option (google.api.http).get = "/skillchain/marketplace/v1/dispute_vote";
   }
 }
 
@@ -261,5 +272,26 @@ message QueryAllDisputeRequest {
 // QueryAllDisputeResponse defines the QueryAllDisputeResponse message.
 message QueryAllDisputeResponse {
   repeated Dispute dispute = 1 [(gogoproto.nullable) = false];
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+// QueryGetDisputeVoteRequest defines the QueryGetDisputeVoteRequest message.
+message QueryGetDisputeVoteRequest {
+  string arbiter = 1;
+}
+
+// QueryGetDisputeVoteResponse defines the QueryGetDisputeVoteResponse message.
+message QueryGetDisputeVoteResponse {
+  DisputeVote dispute_vote = 1 [(gogoproto.nullable) = false];
+}
+
+// QueryAllDisputeVoteRequest defines the QueryAllDisputeVoteRequest message.
+message QueryAllDisputeVoteRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+// QueryAllDisputeVoteResponse defines the QueryAllDisputeVoteResponse message.
+message QueryAllDisputeVoteResponse {
+  repeated DisputeVote dispute_vote = 1 [(gogoproto.nullable) = false];
   cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }

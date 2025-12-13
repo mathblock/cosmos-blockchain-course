@@ -6,7 +6,7 @@ import "fmt"
 func DefaultGenesis() *GenesisState {
 	return &GenesisState{
 		Params:     DefaultParams(),
-		ProfileMap: []Profile{}, GigList: []Gig{}, ApplicationList: []Application{}, ContractList: []Contract{}, DisputeList: []Dispute{}}
+		ProfileMap: []Profile{}, GigList: []Gig{}, ApplicationList: []Application{}, ContractList: []Contract{}, DisputeList: []Dispute{}, DisputeVoteMap: []DisputeVote{}}
 }
 
 // Validate performs basic genesis state validation returning an error upon any
@@ -64,6 +64,15 @@ func (gs GenesisState) Validate() error {
 			return fmt.Errorf("dispute id should be lower or equal than the last id")
 		}
 		disputeIdMap[elem.Id] = true
+	}
+	disputeVoteIndexMap := make(map[string]struct{})
+
+	for _, elem := range gs.DisputeVoteMap {
+		index := fmt.Sprint(elem.Arbiter)
+		if _, ok := disputeVoteIndexMap[index]; ok {
+			return fmt.Errorf("duplicated index for disputeVote")
+		}
+		disputeVoteIndexMap[index] = struct{}{}
 	}
 
 	return gs.Params.Validate()
