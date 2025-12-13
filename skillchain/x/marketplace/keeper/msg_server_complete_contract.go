@@ -42,18 +42,16 @@ func (k msgServer) CompleteContract(goCtx context.Context, msg *types.MsgComplet
 	}
 	totalAmount := math.NewIntFromUint64(contract.Price)
 
-	// Frais plateforme = prix * feePercent / 100
+	// Platform Fee = price * feePercent / 100
 	platformFee := totalAmount.Mul(math.NewIntFromUint64(params.PlatformFeePercent)).Quo(math.NewInt(100))
 	freelancerAmount := totalAmount.Sub(platformFee)
 
-	// 5. Convertir l'adresse du freelancer
 	freelancerAddr, err := sdk.AccAddressFromBech32(contract.Freelancer)
 	if err != nil {
 		return nil, errorsmod.Wrap(sdkerrors.ErrInvalidAddress, "invalid freelancer address")
 	}
 
-	// 6. Transférer les fonds de l'escrow vers le freelancer
-	freelancerCoins := sdk.NewCoins(sdk.NewCoin("uskill", freelancerAmount))
+	freelancerCoins := sdk.NewCoins(sdk.NewCoin("skill", freelancerAmount))
 	err = k.bankKeeper.SendCoinsFromModuleToAccount(
 		ctx,
 		types.ModuleName,
