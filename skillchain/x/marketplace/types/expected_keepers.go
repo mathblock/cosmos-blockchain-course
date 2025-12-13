@@ -14,10 +14,23 @@ type AuthKeeper interface {
 	// Methods imported from account should be defined here
 }
 
+// AccountKeeper defines the expected interface for the Account module.
+type AccountKeeper interface {
+	GetModuleAddress(moduleName string) sdk.AccAddress
+	GetModuleAccount(context.Context, string) sdk.ModuleAccountI
+}
+
 // BankKeeper defines the expected interface for the Bank module.
 type BankKeeper interface {
 	SpendableCoins(context.Context, sdk.AccAddress) sdk.Coins
-	// Methods imported from bank should be defined here
+	SendCoins(context.Context, sdk.AccAddress, sdk.AccAddress, sdk.Coins) error
+	SendCoinsFromAccountToModule(context.Context, sdk.AccAddress, string, sdk.Coins) error
+	SendCoinsFromModuleToAccount(context.Context, string, sdk.AccAddress, sdk.Coins) error
+	SendCoinsFromModuleToModule(context.Context, string, string, sdk.Coins) error
+	MintCoins(context.Context, string, sdk.Coins) error
+	BurnCoins(context.Context, string, sdk.Coins) error
+	GetBalance(context.Context, sdk.AccAddress, string) sdk.Coin
+	GetAllBalances(context.Context, sdk.AccAddress) sdk.Coins
 }
 
 // ParamSubspace defines the expected Subspace interface for parameters.
