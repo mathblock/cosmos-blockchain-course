@@ -100,6 +100,18 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{},
 				},
 
+				{
+					RpcMethod: "ListDispute",
+					Use:       "list-dispute",
+					Short:     "List all dispute",
+				},
+				{
+					RpcMethod:      "GetDispute",
+					Use:            "get-dispute [id]",
+					Short:          "Gets a dispute by id",
+					Alias:          []string{"show-dispute"},
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}},
+				},
 				// this line is used by ignite scaffolding # autocli/query
 			},
 		},

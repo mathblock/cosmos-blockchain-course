@@ -6,6 +6,7 @@ import "amino/amino.proto";
 import "gogoproto/gogo.proto";
 import "skillchain/marketplace/v1/application.proto";
 import "skillchain/marketplace/v1/contract.proto";
+import "skillchain/marketplace/v1/dispute.proto";
 import "skillchain/marketplace/v1/gig.proto";
 import "skillchain/marketplace/v1/params.proto";
 import "skillchain/marketplace/v1/profile.proto";
@@ -26,4 +27,6 @@ message GenesisState {
   uint64 application_count = 6;
   repeated Contract contract_list = 7 [(gogoproto.nullable) = false];
   uint64 contract_count = 8;
+  repeated Dispute dispute_list = 9 [(gogoproto.nullable) = false];
+  uint64 dispute_count = 10;
 }

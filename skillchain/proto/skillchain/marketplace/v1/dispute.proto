@@ -1,0 +1,20 @@
+syntax = "proto3";
+package skillchain.marketplace.v1;
+
+option go_package = "skillchain/x/marketplace/types";
+
+// Dispute defines the Dispute message.
+message Dispute {
+  uint64 id = 1;
+  uint64 contract_id = 2;
+  string initiator = 3;
+  string reason = 4;
+  string client_evidence = 5;
+  string freelancer_evidence = 6;
+  string status = 7;
+  uint64 votes_client = 8;
+  uint64 votes_freelancer = 9;
+  string resolution = 10;
+  int64 created_at = 11;
+  int64 deadline = 12;
+}
