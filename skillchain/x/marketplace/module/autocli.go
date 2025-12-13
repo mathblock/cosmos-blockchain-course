@@ -255,6 +255,12 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Short:          "Send a vote-dispute tx",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "dispute_id"}, {ProtoField: "vote"}},
 				},
+				{
+					RpcMethod:      "ResolveDispute",
+					Use:            "resolve-dispute [dispute-id] [winner]",
+					Short:          "Send a resolve-dispute tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "dispute_id"}, {ProtoField: "winner"}},
+				},
 				// this line is used by ignite scaffolding # autocli/tx
 			},
 		},
