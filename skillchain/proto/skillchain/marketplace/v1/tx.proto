@@ -74,6 +74,9 @@ service Msg {
 
   // SubmitEvidence defines the SubmitEvidence RPC.
   rpc SubmitEvidence(MsgSubmitEvidence) returns (MsgSubmitEvidenceResponse);
+
+  // VoteDispute defines the VoteDispute RPC.
+  rpc VoteDispute(MsgVoteDispute) returns (MsgVoteDisputeResponse);
 }
 
 // MsgUpdateParams is the Msg/UpdateParams request type.
@@ -347,3 +350,14 @@ message MsgSubmitEvidence {
 
 // MsgSubmitEvidenceResponse defines the MsgSubmitEvidenceResponse message.
 message MsgSubmitEvidenceResponse {}
+
+// MsgVoteDispute defines the MsgVoteDispute message.
+message MsgVoteDispute {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+  uint64 dispute_id = 2;
+  string vote = 3;
+}
+
+// MsgVoteDisputeResponse defines the MsgVoteDisputeResponse message.
+message MsgVoteDisputeResponse {}
