@@ -71,6 +71,9 @@ service Msg {
 
   // OpenDispute defines the OpenDispute RPC.
   rpc OpenDispute(MsgOpenDispute) returns (MsgOpenDisputeResponse);
+
+  // SubmitEvidence defines the SubmitEvidence RPC.
+  rpc SubmitEvidence(MsgSubmitEvidence) returns (MsgSubmitEvidenceResponse);
 }
 
 // MsgUpdateParams is the Msg/UpdateParams request type.
@@ -333,3 +336,14 @@ message MsgOpenDispute {
 
 // MsgOpenDisputeResponse defines the MsgOpenDisputeResponse message.
 message MsgOpenDisputeResponse {}
+
+// MsgSubmitEvidence defines the MsgSubmitEvidence message.
+message MsgSubmitEvidence {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+  uint64 dispute_id = 2;
+  string evidence = 3;
+}
+
+// MsgSubmitEvidenceResponse defines the MsgSubmitEvidenceResponse message.
+message MsgSubmitEvidenceResponse {}

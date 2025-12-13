@@ -243,6 +243,12 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Short:          "Send a open-dispute tx",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "contract_id"}, {ProtoField: "reason"}, {ProtoField: "evidence"}},
 				},
+				{
+					RpcMethod:      "SubmitEvidence",
+					Use:            "submit-evidence [dispute-id] [evidence]",
+					Short:          "Send a submit-evidence tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "dispute_id"}, {ProtoField: "evidence"}},
+				},
 				// this line is used by ignite scaffolding # autocli/tx
 			},
 		},

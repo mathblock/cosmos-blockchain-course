@@ -302,6 +302,21 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 		weightMsgOpenDispute,
 		marketplacesimulation.SimulateMsgOpenDispute(am.authKeeper, am.bankKeeper, am.keeper, simState.TxConfig),
 	))
+	const (
+		opWeightMsgSubmitEvidence          = "op_weight_msg_marketplace"
+		defaultWeightMsgSubmitEvidence int = 100
+	)
+
+	var weightMsgSubmitEvidence int
+	simState.AppParams.GetOrGenerate(opWeightMsgSubmitEvidence, &weightMsgSubmitEvidence, nil,
+		func(_ *rand.Rand) {
+			weightMsgSubmitEvidence = defaultWeightMsgSubmitEvidence
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgSubmitEvidence,
+		marketplacesimulation.SimulateMsgSubmitEvidence(am.authKeeper, am.bankKeeper, am.keeper, simState.TxConfig),
+	))
 
 	return operations
 }
