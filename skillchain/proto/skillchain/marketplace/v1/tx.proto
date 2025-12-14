@@ -341,7 +341,9 @@ message MsgOpenDispute {
 }
 
 // MsgOpenDisputeResponse defines the MsgOpenDisputeResponse message.
-message MsgOpenDisputeResponse {}
+message MsgOpenDisputeResponse {
+  uint64 dispute_id = 1;
+}
 
 // MsgSubmitEvidence defines the MsgSubmitEvidence message.
 message MsgSubmitEvidence {
