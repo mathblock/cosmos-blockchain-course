@@ -95,6 +95,9 @@ func (k msgServer) AcceptApplication(goCtx context.Context, msg *types.MsgAccept
 		if application.GigId == gig.Id && application.Id != msg.ApplicationId && application.Status == "pending" {
 			application.Status = "rejected"
 			err = k.Application.Set(ctx, application.Id, application)
+			if err != nil {
+				return false, errorsmod.Wrapf(sdkerrors.ErrUnknownRequest, "failed to reject application %d: %v", application.Id, err)
+			}
 		}
 		return false, nil
 	})
