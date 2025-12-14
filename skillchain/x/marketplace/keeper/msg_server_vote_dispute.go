@@ -93,11 +93,6 @@ func (k msgServer) VoteDispute(goCtx context.Context, msg *types.MsgVoteDispute)
     } else {
         dispute.VotesFreelancer++
     }
-
-	winner := "freelancer"
-    if dispute.VotesClient > dispute.VotesFreelancer {
-        winner = "client"
-    }
     
     if dispute.Status == "open" {
         dispute.Status = "voting"
@@ -113,7 +108,6 @@ func (k msgServer) VoteDispute(goCtx context.Context, msg *types.MsgVoteDispute)
 		msgResolveDispute := &types.MsgResolveDispute{
 			Creator:   "AutomatedResolver",
 			DisputeId: dispute.Id,
-			Winner: winner,
 		}
         k.ResolveDispute(ctx, msgResolveDispute)
     }
