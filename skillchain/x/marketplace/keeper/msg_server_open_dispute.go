@@ -5,6 +5,7 @@ import (
 	"fmt"
 
 	"skillchain/x/marketplace/types"
+
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 
@@ -39,9 +40,10 @@ func (k msgServer) OpenDispute(goCtx context.Context, msg *types.MsgOpenDispute)
         )
     }
     
+    var existingDisputeErr error
     err = k.Dispute.Walk(ctx, nil, func(_ uint64, dispute types.Dispute) (bool, error) {
         if dispute.ContractId == msg.ContractId && dispute.Status == "open" {
-            err = errorsmod.Wrapf(
+            existingDisputeErr = errorsmod.Wrapf(
                 sdkerrors.ErrInvalidRequest,
                 "there is already an open dispute for contract %d",
                 msg.ContractId,
@@ -51,7 +53,10 @@ func (k msgServer) OpenDispute(goCtx context.Context, msg *types.MsgOpenDispute)
         return false, nil
     })
     if err != nil {
-        return nil, errorsmod.Wrapf(sdkerrors.ErrNotFound, "contract %d not found", msg.ContractId)
+        return nil, errorsmod.Wrap(err, "failed to check existing disputes")
+    }
+    if existingDisputeErr != nil {
+        return nil, existingDisputeErr
     }
     
     params, err := k.Params.Get(ctx)
@@ -82,6 +87,7 @@ func (k msgServer) OpenDispute(goCtx context.Context, msg *types.MsgOpenDispute)
 	if err != nil {
 		return nil, errorsmod.Wrap(err, "failed to get next dispute id")
 	}
+	dispute.Id = disputeId
 	err = k.Dispute.Set(ctx, disputeId, dispute)
     if err != nil {
         return nil, errorsmod.Wrap(err, "failed to set dispute")

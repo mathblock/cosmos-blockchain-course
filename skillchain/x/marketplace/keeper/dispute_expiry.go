@@ -13,12 +13,12 @@ import (
 func (k Keeper) ProcessExpiredDisputes(ctx sdk.Context) error {
     currentTime := ctx.BlockTime().Unix()
    	err := k.Dispute.Walk(ctx, nil, func(key uint64, dispute types.Dispute) (stop bool, err error) {
-		if dispute.Status != "open" || dispute.Status != "voting" {
-			return true, errorsmod.Wrapf(sdkerrors.ErrInvalidRequest, "dispute %d is not active", dispute.Id)
+		if dispute.Status != "open" && dispute.Status != "voting" {
+			return false, nil
 		}
         
 		if dispute.Deadline > currentTime { 
-			return true, errorsmod.Wrapf(sdkerrors.ErrInvalidRequest, "dispute %d has expired", dispute.Id)
+			return false, nil
 		}
 
 		params, err := k.Params.Get(ctx)
@@ -28,11 +28,7 @@ func (k Keeper) ProcessExpiredDisputes(ctx sdk.Context) error {
 
 		totalVotes := dispute.VotesClient + dispute.VotesFreelancer
 		if totalVotes >= params.MinArbitersRequired {
-			msgResolveDipute := &types.MsgResolveDispute{
-				Creator:   "EXPIRY-ALL-VOTES-RECEIVED",
-				DisputeId: dispute.Id,
-			}
-			_, err := k.ResolveDispute(ctx, msgResolveDipute)
+			err := k.resolveDisputeInternal(ctx, dispute.Id)
 			if err != nil {
 				return true, errorsmod.Wrapf(err, "failed to resolve expired dispute %d", dispute.Id)
 			}
@@ -50,12 +46,7 @@ func (k Keeper) ProcessExpiredDisputes(ctx sdk.Context) error {
 				return true, errorsmod.Wrapf(err, "failed to update dispute %d", dispute.Id)
 			}
 
-			msgResolveDipute := &types.MsgResolveDispute{
-				Creator:   "EXPIRY-INSUFFICIENT-VOTES",
-				DisputeId: dispute.Id,
-			}
-			
-			_, err = k.ResolveDispute(ctx, msgResolveDipute)
+			err = k.resolveDisputeInternal(ctx, dispute.Id)
 			if err != nil {
 				return true, errorsmod.Wrapf(err, "failed to resolve expired dispute %d", dispute.Id)
 			}
