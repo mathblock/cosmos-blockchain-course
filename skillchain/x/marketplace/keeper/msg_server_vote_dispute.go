@@ -53,12 +53,12 @@ func (k msgServer) VoteDispute(goCtx context.Context, msg *types.MsgVoteDispute)
         return nil, errorsmod.Wrap(err, "failed to get params")
     }
     voterAddr, _ := sdk.AccAddressFromBech32(msg.Creator)
-    balance := k.bankKeeper.GetBalance(ctx, voterAddr, "stake")
+    balance := k.bankKeeper.GetBalance(ctx, voterAddr, "skill")
     
     if balance.Amount.LT(math.NewIntFromUint64(params.ArbiterStakeRequired)) {
         return nil, errorsmod.Wrapf(
             types.ErrInsufficientFunds,
-            "arbiter must have at least %d stake (has %s)",
+            "arbiter must have at least %d skill (has %s)",
             params.ArbiterStakeRequired,
             balance.String(),
         )
