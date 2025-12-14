@@ -4,29 +4,25 @@ import (
 	"context"
 	"fmt"
 
+	math "cosmossdk.io/math"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
-	math "cosmossdk.io/math"
 
 	"skillchain/x/marketplace/types"
 
 	errorsmod "cosmossdk.io/errors"
 )
 
-func (k Keeper) ResolveDispute(goCtx context.Context, msg *types.MsgResolveDispute) (*types.MsgResolveDisputeResponse, error) {
-	if _, err := k.addressCodec.StringToBytes(msg.Creator); err != nil {
-		return nil, errorsmod.Wrap(err, "invalid authority address")
-	}
-
-	// TODO: Handle the message
-	ctx := sdk.UnwrapSDKContext(goCtx)
-	dispute, errorDispute := k.Dispute.Get(ctx, msg.DisputeId)
+// resolveDisputeInternal contains the core logic for resolving a dispute
+// This can be called from both the message server and the expiry handler
+func (k Keeper) resolveDisputeInternal(ctx sdk.Context, disputeId uint64) error {
+	dispute, errorDispute := k.Dispute.Get(ctx, disputeId)
 	if errorDispute != nil {
-		return nil, errorsmod.Wrapf(sdkerrors.ErrNotFound, "dispute %d not found", msg.DisputeId)
+		return errorsmod.Wrapf(sdkerrors.ErrNotFound, "dispute %d not found", disputeId)
 	}
 
 	if dispute.Status != "open" && dispute.Status != "voting" {
-		return nil, errorsmod.Wrapf(
+		return errorsmod.Wrapf(
 			sdkerrors.ErrInvalidRequest,
 			"dispute is not open for resolution (status: %s)",
 			dispute.Status,
@@ -37,7 +33,7 @@ func (k Keeper) ResolveDispute(goCtx context.Context, msg *types.MsgResolveDispu
 
 	contract, errorContract := k.Contract.Get(ctx, contractId)
     if errorContract != nil {
-        return nil, errorsmod.Wrapf(sdkerrors.ErrNotFound, "contract %d not found", contractId)
+        return errorsmod.Wrapf(sdkerrors.ErrNotFound, "contract %d not found", contractId)
     }
     
     var winner string
@@ -63,7 +59,7 @@ func (k Keeper) ResolveDispute(goCtx context.Context, msg *types.MsgResolveDispu
     }
     
     if errorWinner != nil {
-        return nil, errorsmod.Wrapf(sdkerrors.ErrInvalidAddress, "invalid winner address")
+        return errorsmod.Wrapf(sdkerrors.ErrInvalidAddress, "invalid winner address")
     }
     
     escrowAmount := sdk.NewCoins(sdk.NewCoin("skill", math.NewIntFromUint64(contract.Price)))
@@ -75,30 +71,30 @@ func (k Keeper) ResolveDispute(goCtx context.Context, msg *types.MsgResolveDispu
         escrowAmount,
     )
     if errSendCoin != nil {
-        return nil, errorsmod.Wrap(sdkerrors.ErrInvalidRequest, "failed to send coins to winner")
+        return errorsmod.Wrap(sdkerrors.ErrInvalidRequest, "failed to send coins to winner")
     }
     
     err := k.Dispute.Set(ctx, dispute.Id, dispute)
     if err != nil {
-        return nil, errorsmod.Wrap(err, "failed to update dispute")
+        return errorsmod.Wrap(err, "failed to update dispute")
     }
     
     contract.Status = "resolved_" + winner
     contract.CompletedAt = ctx.BlockTime().Unix()
     err = k.Contract.Set(ctx, contract.Id, contract)
     if err != nil {
-        return nil, errorsmod.Wrap(err, "failed to update contract")
+        return errorsmod.Wrap(err, "failed to update contract")
     }
     
     gig, err := k.Gig.Get(ctx, contract.GigId)
     if err != nil {
-        return nil, errorsmod.Wrapf(sdkerrors.ErrNotFound, "gig %d not found", contract.GigId)
+        return errorsmod.Wrapf(sdkerrors.ErrNotFound, "gig %d not found", contract.GigId)
     }
 
     gig.Status = "closed"
     err = k.Gig.Set(ctx, gig.Id, gig)
     if err != nil {
-        return nil, errorsmod.Wrap(err, "failed to update gig")
+        return errorsmod.Wrap(err, "failed to update gig")
     }
     
     if winner == "freelancer" {
@@ -119,6 +115,21 @@ func (k Keeper) ResolveDispute(goCtx context.Context, msg *types.MsgResolveDispu
             sdk.NewAttribute("amount", escrowAmount.String()),
         ),
     )
+
+	return nil
+}
+
+func (k Keeper) ResolveDispute(goCtx context.Context, msg *types.MsgResolveDispute) (*types.MsgResolveDisputeResponse, error) {
+	if _, err := k.addressCodec.StringToBytes(msg.Creator); err != nil {
+		return nil, errorsmod.Wrap(err, "invalid authority address")
+	}
+
+	ctx := sdk.UnwrapSDKContext(goCtx)
+	
+	err := k.resolveDisputeInternal(ctx, msg.DisputeId)
+	if err != nil {
+		return nil, err
+	}
 
 	return &types.MsgResolveDisputeResponse{}, nil
 }
