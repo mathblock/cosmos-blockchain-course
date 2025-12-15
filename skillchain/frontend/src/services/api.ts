@@ -21,14 +21,14 @@ const api = axios.create({
 
 // Module Params
 export async function getParams(): Promise<Params> {
-  const response = await api.get('/skillchain/marketplace/params');
+  const response = await api.get('/skillchain/marketplace/v1/params');
   return response.data.params;
 }
 
 // Profils
 export async function getProfile(address: string): Promise<Profile | null> {
   try {
-    const response = await api.get(`/skillchain/marketplace/profile/${address}`);
+    const response = await api.get(`/skillchain/marketplace/v1/profile/${address}`);
     return response.data.profile;
   } catch (error: any) {
     if (error.response?.status === 404) return null;
@@ -37,14 +37,14 @@ export async function getProfile(address: string): Promise<Profile | null> {
 }
 
 export async function getAllProfiles(): Promise<Profile[]> {
-  const response = await api.get('/skillchain/marketplace/profile');
+  const response = await api.get('/skillchain/marketplace/v1/profile');
   return response.data.profile || [];
 }
 
 // Gigs (missions)
 export async function getGig(id: string): Promise<Gig | null> {
   try {
-    const response = await api.get(`/skillchain/marketplace/gig/${id}`);
+    const response = await api.get(`/skillchain/marketplace/v1/gig/${id}`);
     return response.data.gig;
   } catch (error: any) {
     if (error.response?.status === 404) return null;
@@ -53,7 +53,7 @@ export async function getGig(id: string): Promise<Gig | null> {
 }
 
 export async function getAllGigs(): Promise<Gig[]> {
-  const response = await api.get('/skillchain/marketplace/gig');
+  const response = await api.get('/skillchain/marketplace/v1/gig');
   return response.data.gig || [];
 }
 
@@ -65,7 +65,7 @@ export async function getOpenGigs(): Promise<Gig[]> {
 // Applications
 export async function getApplication(id: string): Promise<Application | null> {
   try {
-    const response = await api.get(`/skillchain/marketplace/application/${id}`);
+    const response = await api.get(`/skillchain/marketplace/v1/application/${id}`);
     return response.data.application;
   } catch (error: any) {
     if (error.response?.status === 404) return null;
@@ -74,12 +74,12 @@ export async function getApplication(id: string): Promise<Application | null> {
 }
 
 export async function getAllApplications(): Promise<Application[]> {
-  const response = await api.get('/skillchain/marketplace/application');
+  const response = await api.get('/skillchain/marketplace/v1/application');
   return response.data.application || [];
 }
 
 export async function getApplicationsByGig(gigId: string): Promise<Application[]> {
-  const response = await api.get(`/skillchain/marketplace/applications_by_gig/${gigId}`);
+  const response = await api.get(`/skillchain/marketplace/v1/applications_by_gig/${gigId}`);
   return response.data.applications || [];
 }
 
@@ -91,7 +91,7 @@ export async function getApplicationsByFreelancer(address: string): Promise<Appl
 // Contracts
 export async function getContract(id: string): Promise<Contract | null> {
   try {
-    const response = await api.get(`/skillchain/marketplace/contract/${id}`);
+    const response = await api.get(`/skillchain/marketplace/v1/contract/${id}`);
     return response.data.contract;
   } catch (error: any) {
     if (error.response?.status === 404) return null;
@@ -100,19 +100,19 @@ export async function getContract(id: string): Promise<Contract | null> {
 }
 
 export async function getAllContracts(): Promise<Contract[]> {
-  const response = await api.get('/skillchain/marketplace/contract');
+  const response = await api.get('/skillchain/marketplace/v1/contract');
   return response.data.contract || [];
 }
 
 export async function getContractsByUser(address: string): Promise<Contract[]> {
-  const response = await api.get(`/skillchain/marketplace/contracts_by_user/${address}`);
+  const response = await api.get(`/skillchain/marketplace/v1/contracts_by_user/${address}`);
   return response.data.contracts || [];
 }
 
 // Disputes
 export async function getDispute(id: string): Promise<Dispute | null> {
   try {
-    const response = await api.get(`/skillchain/marketplace/dispute/${id}`);
+    const response = await api.get(`/skillchain/marketplace/v1/dispute/${id}`);
     return response.data.dispute;
   } catch (error: any) {
     if (error.response?.status === 404) return null;
@@ -121,13 +121,13 @@ export async function getDispute(id: string): Promise<Dispute | null> {
 }
 
 export async function getAllDisputes(): Promise<Dispute[]> {
-  const response = await api.get('/skillchain/marketplace/dispute');
+  const response = await api.get('/skillchain/marketplace/v1/dispute');
   return response.data.dispute || [];
 }
 
 // Escrow Balance
 export async function getEscrowBalance(): Promise<string> {
-  const response = await api.get('/skillchain/marketplace/escrow_balance');
+  const response = await api.get('/skillchain/marketplace/v1/escrow_balance');
   return response.data.balance?.amount || '0';
 }
 
