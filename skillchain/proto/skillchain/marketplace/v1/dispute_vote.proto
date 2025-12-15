@@ -1,0 +1,12 @@
+syntax = "proto3";
+package skillchain.marketplace.v1;
+
+option go_package = "skillchain/x/marketplace/types";
+
+// DisputeVote defines the DisputeVote message.
+message DisputeVote {
+  string arbiter = 1;
+  uint64 dispute_id = 2;
+  string vote = 3;
+  int64 voted_at = 4;
+}

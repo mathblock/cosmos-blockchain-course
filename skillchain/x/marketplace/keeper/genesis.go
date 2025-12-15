@@ -40,6 +40,20 @@ func (k Keeper) InitGenesis(ctx context.Context, genState types.GenesisState) er
 	if err := k.ContractSeq.Set(ctx, genState.ContractCount); err != nil {
 		return err
 	}
+	for _, elem := range genState.DisputeList {
+		if err := k.Dispute.Set(ctx, elem.Id, elem); err != nil {
+			return err
+		}
+	}
+
+	if err := k.DisputeSeq.Set(ctx, genState.DisputeCount); err != nil {
+		return err
+	}
+	for _, elem := range genState.DisputeVoteMap {
+		if err := k.DisputeVote.Set(ctx, elem.Arbiter, elem); err != nil {
+			return err
+		}
+	}
 
 	return k.Params.Set(ctx, genState.Params)
 }
@@ -93,6 +107,24 @@ func (k Keeper) ExportGenesis(ctx context.Context) (*types.GenesisState, error) 
 
 	genesis.ContractCount, err = k.ContractSeq.Peek(ctx)
 	if err != nil {
+		return nil, err
+	}
+	err = k.Dispute.Walk(ctx, nil, func(key uint64, elem types.Dispute) (bool, error) {
+		genesis.DisputeList = append(genesis.DisputeList, elem)
+		return false, nil
+	})
+	if err != nil {
+		return nil, err
+	}
+
+	genesis.DisputeCount, err = k.DisputeSeq.Peek(ctx)
+	if err != nil {
+		return nil, err
+	}
+	if err := k.DisputeVote.Walk(ctx, nil, func(_ string, val types.DisputeVote) (stop bool, err error) {
+		genesis.DisputeVoteMap = append(genesis.DisputeVoteMap, val)
+		return false, nil
+	}); err != nil {
 		return nil, err
 	}
 

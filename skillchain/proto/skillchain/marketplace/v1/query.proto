@@ -4,14 +4,16 @@ package skillchain.marketplace.v1;
 
 import "amino/amino.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
+import "cosmos/base/v1beta1/coin.proto";
 import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "skillchain/marketplace/v1/application.proto";
 import "skillchain/marketplace/v1/contract.proto";
+import "skillchain/marketplace/v1/dispute.proto";
+import "skillchain/marketplace/v1/dispute_vote.proto";
 import "skillchain/marketplace/v1/gig.proto";
 import "skillchain/marketplace/v1/params.proto";
 import "skillchain/marketplace/v1/profile.proto";
-import "cosmos/base/v1beta1/coin.proto";
 
 option go_package = "skillchain/x/marketplace/types";
 
@@ -85,6 +87,26 @@ service Query {
   // EscrowBalance Queries a list of EscrowBalance items.
   rpc EscrowBalance(QueryEscrowBalanceRequest) returns (QueryEscrowBalanceResponse) {
     option (google.api.http).get = "/skillchain/marketplace/v1/escrow_balance";
+  }
+
+  // ListDispute Queries a list of Dispute items.
+  rpc GetDispute(QueryGetDisputeRequest) returns (QueryGetDisputeResponse) {
+    option (google.api.http).get = "/skillchain/marketplace/v1/dispute/{id}";
+  }
+
+  // ListDispute defines the ListDispute RPC.
+  rpc ListDispute(QueryAllDisputeRequest) returns (QueryAllDisputeResponse) {
+    option (google.api.http).get = "/skillchain/marketplace/v1/dispute";
+  }
+
+  // ListDisputeVote Queries a list of DisputeVote items.
+  rpc GetDisputeVote(QueryGetDisputeVoteRequest) returns (QueryGetDisputeVoteResponse) {
+    option (google.api.http).get = "/skillchain/marketplace/v1/dispute_vote/{arbiter}";
+  }
+
+  // ListDisputeVote defines the ListDisputeVote RPC.
+  rpc ListDisputeVote(QueryAllDisputeVoteRequest) returns (QueryAllDisputeVoteResponse) {
+    option (google.api.http).get = "/skillchain/marketplace/v1/dispute_vote";
   }
 }
 
@@ -230,4 +252,46 @@ message QueryEscrowBalanceRequest {}
 // QueryEscrowBalanceResponse defines the QueryEscrowBalanceResponse message.
 message QueryEscrowBalanceResponse {
   cosmos.base.v1beta1.Coin balance = 1;
+}
+
+// QueryGetDisputeRequest defines the QueryGetDisputeRequest message.
+message QueryGetDisputeRequest {
+  uint64 id = 1;
+}
+
+// QueryGetDisputeResponse defines the QueryGetDisputeResponse message.
+message QueryGetDisputeResponse {
+  Dispute dispute = 1 [(gogoproto.nullable) = false];
+}
+
+// QueryAllDisputeRequest defines the QueryAllDisputeRequest message.
+message QueryAllDisputeRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+// QueryAllDisputeResponse defines the QueryAllDisputeResponse message.
+message QueryAllDisputeResponse {
+  repeated Dispute dispute = 1 [(gogoproto.nullable) = false];
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+// QueryGetDisputeVoteRequest defines the QueryGetDisputeVoteRequest message.
+message QueryGetDisputeVoteRequest {
+  string arbiter = 1;
+}
+
+// QueryGetDisputeVoteResponse defines the QueryGetDisputeVoteResponse message.
+message QueryGetDisputeVoteResponse {
+  DisputeVote dispute_vote = 1 [(gogoproto.nullable) = false];
+}
+
+// QueryAllDisputeVoteRequest defines the QueryAllDisputeVoteRequest message.
+message QueryAllDisputeVoteRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+// QueryAllDisputeVoteResponse defines the QueryAllDisputeVoteResponse message.
+message QueryAllDisputeVoteResponse {
+  repeated DisputeVote dispute_vote = 1 [(gogoproto.nullable) = false];
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }

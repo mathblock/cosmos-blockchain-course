@@ -100,6 +100,30 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{},
 				},
 
+				{
+					RpcMethod: "ListDispute",
+					Use:       "list-dispute",
+					Short:     "List all dispute",
+				},
+				{
+					RpcMethod:      "GetDispute",
+					Use:            "get-dispute [id]",
+					Short:          "Gets a dispute by id",
+					Alias:          []string{"show-dispute"},
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}},
+				},
+				{
+					RpcMethod: "ListDisputeVote",
+					Use:       "list-dispute-vote",
+					Short:     "List all dispute-vote",
+				},
+				{
+					RpcMethod:      "GetDisputeVote",
+					Use:            "get-dispute-vote [id]",
+					Short:          "Gets a dispute-vote",
+					Alias:          []string{"show-dispute-vote"},
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "arbiter"}},
+				},
 				// this line is used by ignite scaffolding # autocli/query
 			},
 		},
@@ -212,6 +236,30 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Use:            "dispute-contract [contract-id] [reason]",
 					Short:          "Send a dispute-contract tx",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "contract_id"}, {ProtoField: "reason"}},
+				},
+				{
+					RpcMethod:      "OpenDispute",
+					Use:            "open-dispute [contract-id] [reason] [evidence]",
+					Short:          "Send a open-dispute tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "contract_id"}, {ProtoField: "reason"}, {ProtoField: "evidence"}},
+				},
+				{
+					RpcMethod:      "SubmitEvidence",
+					Use:            "submit-evidence [dispute-id] [evidence]",
+					Short:          "Send a submit-evidence tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "dispute_id"}, {ProtoField: "evidence"}},
+				},
+				{
+					RpcMethod:      "VoteDispute",
+					Use:            "vote-dispute [dispute-id] [vote]",
+					Short:          "Send a vote-dispute tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "dispute_id"}, {ProtoField: "vote"}},
+				},
+				{
+					RpcMethod:      "ResolveDispute",
+					Use:            "resolve-dispute [dispute-id] [winner]",
+					Short:          "Send a resolve-dispute tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "dispute_id"}, {ProtoField: "winner"}},
 				},
 				// this line is used by ignite scaffolding # autocli/tx
 			},

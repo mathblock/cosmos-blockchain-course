@@ -31,6 +31,9 @@ type Keeper struct {
 	Application    collections.Map[uint64, types.Application]
 	ContractSeq    collections.Sequence
 	Contract       collections.Map[uint64, types.Contract]
+	DisputeSeq     collections.Sequence
+	Dispute        collections.Map[uint64, types.Dispute]
+	DisputeVote    collections.Map[string, types.DisputeVote]
 }
 
 func NewKeeper(
@@ -63,7 +66,9 @@ func NewKeeper(
 		ApplicationSeq: collections.NewSequence(sb, types.ApplicationCountKey, "applicationSequence"),
 		Contract:       collections.NewMap(sb, types.ContractKey, "contract", collections.Uint64Key, codec.CollValue[types.Contract](cdc)),
 		ContractSeq:    collections.NewSequence(sb, types.ContractCountKey, "contractSequence"),
-	}
+		Dispute:        collections.NewMap(sb, types.DisputeKey, "dispute", collections.Uint64Key, codec.CollValue[types.Dispute](cdc)),
+		DisputeSeq:     collections.NewSequence(sb, types.DisputeCountKey, "disputeSequence"),
+		DisputeVote:    collections.NewMap(sb, types.DisputeVoteKey, "disputeVote", collections.StringKey, codec.CollValue[types.DisputeVote](cdc))}
 	schema, err := sb.Build()
 	if err != nil {
 		panic(err)
