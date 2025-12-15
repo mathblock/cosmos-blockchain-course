@@ -302,11 +302,6 @@ export const CHAIN_CONFIG = {
       coinMinimalDenom: 'uskill',
       coinDecimals: 6,
     },
-    {
-      coinDenom: 'SKILL',
-      coinMinimalDenom: 'skill',
-      coinDecimals: 6,
-    },
   ],
   feeCurrencies: [
     {
