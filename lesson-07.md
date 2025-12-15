@@ -79,6 +79,24 @@ npm install @headlessui/react @heroicons/react
 
 # Installer les types
 npm install -D @types/node
+
+# Installer router
+npm intall react-router
+
+# Installer Tailwind css 
+npm install tailwindcss @tailwindcss/vite
+
+# In vite.config.ts add it in plugins section
+import { defineConfig } from 'vite'
+import tailwindcss from '@tailwindcss/vite'
+export default defineConfig({
+  plugins: [
+    tailwindcss(),
+  ],
+})
+
+# Add in index.css
+@import "tailwindcss";
 ```
 
 ---
