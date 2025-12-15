@@ -39,5 +39,15 @@ skillchaind tx marketplace complete-contract <contract_id> --from <client>  # Re
 # Vérifier les mises à jour
 skillchaind query marketplace show-contract <id>
 skillchaind query marketplace show-profile <address>
+
+# Gestion des disputes
+skillchaind tx marketplace open-dispute <contract_id> <reason> <evidence> --from <party>
+skillchaind tx marketplace submit-evidence <dispute_id> <evidence> --from <party>
+skillchaind tx marketplace vote-dispute <dispute_id> <client|freelancer> --from <arbiter>
+
+# Queries
+skillchaind query marketplace list-dispute
+skillchaind query marketplace show-dispute <id>
+skillchaind query marketplace list-dispute-vote
 ```
 
