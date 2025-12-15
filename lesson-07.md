@@ -168,6 +168,15 @@ export default defineConfig({
 })
 ```
 
+**tsconfig.app.ts :**
+```typescript
+// Need to add this under '/* Bundler mode */'
+"baseUrl": ".",
+"paths": {
+  "@/*": ["src/*"]
+},
+```
+
 ---
 
 ## 7.5 Types TypeScript pour SkillChain
