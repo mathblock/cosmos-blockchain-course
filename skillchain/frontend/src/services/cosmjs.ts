@@ -14,11 +14,6 @@ export const CHAIN_CONFIG = {
       coinMinimalDenom: 'skill',
       coinDecimals: 6,
     },
-    {
-      coinDenom: 'SKILL',
-      coinMinimalDenom: 'skill',
-      coinDecimals: 6,
-    },
   ],
   feeCurrencies: [
     {
@@ -55,7 +50,7 @@ export async function getSigningClient(signer: OfflineSigner): Promise<SigningSt
     CHAIN_CONFIG.rpc,
     signer,
     {
-      gasPrice: GasPrice.fromString('0.025uskill'),
+      gasPrice: GasPrice.fromString('0.025skill'),
     }
   );
 }
